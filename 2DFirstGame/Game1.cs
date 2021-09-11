@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using _2DFirstGame.Utils;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,7 @@ namespace _2DFirstGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private FPS_Handler _frameCounter = new FPS_Handler();
 
         public Game1()
         {
