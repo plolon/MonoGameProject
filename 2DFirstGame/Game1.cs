@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using _2DFirstGame.Utils;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,7 @@ namespace _2DFirstGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private FPS_Handler _frameCounter = new FPS_Handler();
 
         public Game1()
         {
@@ -42,11 +44,21 @@ namespace _2DFirstGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Bisque);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            string fps = getFPS(gameTime);
+            // TODO: Display fps
 
-            base.Draw(gameTime);
+            _spriteBatch.End();
+        }
+
+        private string getFPS(GameTime gameTime)
+        {
+
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _frameCounter.Update(deltaTime);
+            return $"FPS{_frameCounter.AverageFramesPerSecond.ToString("F0")}";
         }
     }
 }
