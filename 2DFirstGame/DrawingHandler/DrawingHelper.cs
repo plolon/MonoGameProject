@@ -2,6 +2,7 @@
 using _2DFirstGame.DrawingHandler.String.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Linq;
 
 namespace _2DFirstGame.DrawingHandler
@@ -37,18 +38,21 @@ namespace _2DFirstGame.DrawingHandler
             int num;
             if (int.TryParse(character.ToString(), out num))    // number
             {
-                Numbers code = DrawNumbers.ConvertIntToNumbers(num);
+                Numbers code = String.DrawString.ConvertIntToNumbers(num);
                 Rectangle rect = util.getRect(code);
-                DrawNumbers.Draw(device, numbers, rect, new Vector2(posX, posY), scale);
+                String.DrawString.Draw(device, numbers, rect, new Vector2(posX, posY), scale);
+                posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
-            else if (true)  // character
+            else if (character.Equals(' '))  // character
             {
-                Characters code = DrawCharacters.ConvertCharToCharacters(character);
+                Characters code = String.DrawString.ConvertCharToCharacters(character);
                 Rectangle rect = util.getRect(code);
+                String.DrawString.Draw(device, numbers, rect, new Vector2(posX, posY), scale);
+                posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
             else    // whitespace
             {
-
+                posX += (float)Math.Ceiling((decimal)((47 * scale) + (3 * scale)));
             }
         }
     }
