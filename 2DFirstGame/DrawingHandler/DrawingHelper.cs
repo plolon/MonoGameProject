@@ -1,9 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
+﻿using _2DFirstGame.DrawingHandler.String;
+using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Numerics;
-using System.Text;
 
 namespace _2DFirstGame.DrawingHandler
 {
@@ -11,6 +9,8 @@ namespace _2DFirstGame.DrawingHandler
     {
         private Texture2D numbers;
         private Texture2D characters;
+
+        private float posX;
 
         public DrawingHelper(Texture2D numbers, Texture2D characters)
         {
@@ -20,25 +20,25 @@ namespace _2DFirstGame.DrawingHandler
 
         public void DrawString(SpriteBatch device, Vector2 position, string text, float scale)
         {
+            posX = position.X;
             text.ToList().ForEach(x => HandleLetter(x));
+        }
 
-            void HandleLetter(char letter)
+        private void HandleLetter(char character)
+        {
+            int num;
+            if (int.TryParse(character.ToString(), out num))    // number
             {
-                int num;
-                if(int.TryParse(letter.ToString(), out num))    // number
-                {
-
-                }
-                else if (true)  // character
-                {
-
-                }
-                else    // whitespace
-                {
-
-                }
+                Numbers code = DrawNumbers.ConvertIntToNumbers(num);
             }
+            else if (true)  // character
+            {
+                Characters code = DrawCharacters.ConvertCharToCharacters(character);
+            }
+            else    // whitespace
+            {
 
+            }
         }
     }
 }
