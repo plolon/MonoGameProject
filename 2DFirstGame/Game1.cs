@@ -44,11 +44,21 @@ namespace _2DFirstGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Bisque);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            string fps = getFPS(gameTime);
+            // TODO: Display fps
 
-            base.Draw(gameTime);
+            _spriteBatch.End();
+        }
+
+        private string getFPS(GameTime gameTime)
+        {
+
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _frameCounter.Update(deltaTime);
+            return $"FPS{_frameCounter.AverageFramesPerSecond.ToString("F0")}";
         }
     }
 }
