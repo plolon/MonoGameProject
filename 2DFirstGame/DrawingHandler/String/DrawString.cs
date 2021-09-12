@@ -16,10 +16,6 @@ namespace _2DFirstGame.DrawingHandler.String
             }
             else
             {
-                if (code == 0)
-                {
-                    return Characters.Z;
-                }
                 return (Characters)code;
             }
         }

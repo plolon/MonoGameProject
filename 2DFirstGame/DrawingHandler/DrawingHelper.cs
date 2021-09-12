@@ -43,11 +43,11 @@ namespace _2DFirstGame.DrawingHandler
                 String.DrawString.Draw(device, numbers, rect, new Vector2(posX, posY), scale);
                 posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
-            else if (character.Equals(' '))  // character
+            else if (!character.Equals(' '))  // character
             {
                 Characters code = String.DrawString.ConvertCharToCharacters(character);
                 Rectangle rect = util.getRect(code);
-                String.DrawString.Draw(device, numbers, rect, new Vector2(posX, posY), scale);
+                String.DrawString.Draw(device, characters, rect, new Vector2(posX, posY), scale);
                 posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
             else    // whitespace

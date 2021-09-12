@@ -36,4 +36,3 @@ namespace _2DFirstGame.Utils
         }
     }
 }
-}
