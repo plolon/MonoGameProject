@@ -15,5 +15,12 @@ namespace _2DFirstGame.DrawingHandler
             this.numbers = numbers;
             this.characters = characters;
         }
+
+        public void DrawString()
+        {
+
+        }
+
+
     }
 }
