@@ -1,4 +1,5 @@
-﻿using _2DFirstGame.Utils;
+﻿using _2DFirstGame.DrawingHandler;
+using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,7 +10,8 @@ namespace _2DFirstGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private FPS_Handler _frameCounter = new FPS_Handler();
+        private FPS_Handler _frameCounter;
+        private DrawingHelper _drawingHelper;
 
         public Game1()
         {
@@ -20,15 +22,14 @@ namespace _2DFirstGame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            _frameCounter = new FPS_Handler();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            _drawingHelper = new DrawingHelper(_spriteBatch, Content.Load<Texture2D>(@"StringDrawing\Numbers"), Content.Load<Texture2D>(@"StringDrawing\Characters"));
             // TODO: use this.Content to load your game content here
         }
 
@@ -49,7 +50,7 @@ namespace _2DFirstGame
             _spriteBatch.Begin();
             string fps = getFPS(gameTime);
             // TODO: Display fps
-
+            _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
             _spriteBatch.End();
         }
 
@@ -58,7 +59,7 @@ namespace _2DFirstGame
 
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
-            return $"FPS{_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+            return $"FPS {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
         }
     }
 }
