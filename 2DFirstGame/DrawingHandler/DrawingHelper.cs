@@ -1,4 +1,5 @@
 ﻿using _2DFirstGame.DrawingHandler.String;
+using _2DFirstGame.DrawingHandler.String.Utils;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Numerics;
@@ -11,11 +12,13 @@ namespace _2DFirstGame.DrawingHandler
         private Texture2D characters;
 
         private float posX;
+        private StringUtil util;
 
         public DrawingHelper(Texture2D numbers, Texture2D characters)
         {
             this.numbers = numbers;
             this.characters = characters;
+            util = new StringUtil();
         }
 
         public void DrawString(SpriteBatch device, Vector2 position, string text, float scale)
