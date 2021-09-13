@@ -11,6 +11,7 @@ namespace _2DFirstGame.DrawingHandler
     {
         private Texture2D numbers;
         private Texture2D characters;
+        private Texture2D special;
         private SpriteBatch device;
 
         private float posX;
@@ -18,11 +19,12 @@ namespace _2DFirstGame.DrawingHandler
         private StringUtil util;
         private float scale;
 
-        public DrawingHelper(SpriteBatch device, Texture2D numbers, Texture2D characters)
+        public DrawingHelper(SpriteBatch device, Texture2D numbers, Texture2D characters, Texture2D special)
         {
             this.device = device;
             this.numbers = numbers;
             this.characters = characters;
+            this.special = special;
             util = new StringUtil();
         }
         public void DrawString(Vector2 position, string text, float scale)
