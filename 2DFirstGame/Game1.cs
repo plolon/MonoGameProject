@@ -13,6 +13,7 @@ namespace _2DFirstGame
         private FPS_Handler _frameCounter;
         private DrawingHelper _drawingHelper;
 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);

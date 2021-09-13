@@ -3,6 +3,7 @@ using _2DFirstGame.DrawingHandler.String.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace _2DFirstGame.DrawingHandler
@@ -33,6 +34,12 @@ namespace _2DFirstGame.DrawingHandler
             posX = position.Y;
             this.scale = scale;
             text.ToList().ForEach(x => HandleLetter(x));
+        }
+
+        public void CreateAnimationString(Vector2 position, string text)
+        {
+            List<LetterToAnimate> animation = new List<LetterToAnimate>();
+            text.ToList().ForEach(x => animation.Add(new LetterToAnimate(position, x)));
         }
 
         private void HandleLetter(char character)
