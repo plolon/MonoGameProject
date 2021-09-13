@@ -12,6 +12,7 @@ namespace _2DFirstGame
         private SpriteBatch _spriteBatch;
         private FPS_Handler _frameCounter;
         private DrawingHelper _drawingHelper;
+        private AnimationString _animationString;
 
 
         public Game1()
@@ -34,6 +35,7 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
+            _animationString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(150, 150), "start");
         }
 
         protected override void Update(GameTime gameTime)
@@ -53,7 +55,8 @@ namespace _2DFirstGame
             _spriteBatch.Begin();
             string fps = getFPS(gameTime);
             // TODO: Display fps
-            _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
+            _drawingHelper.DrawString(new Vector2(95, 15), getFPS(gameTime), 0.3f);
+            _animationString.Draw();
             _spriteBatch.End();
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using _2DFirstGame.DrawingHandler.String;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +25,12 @@ namespace _2DFirstGame.DrawingHandler
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            Animate();
+           // Animate();
             foreach(var item in animationLetters)
             {
-                drawingHelper.DrawString(item.Position, item.Character.ToString(), 1f);
+                drawingHelper.DrawString(new Vector2(item.Position.X, item.Position.Y), item.Character.ToString(), 1f);
             }
         }
 
@@ -39,11 +40,11 @@ namespace _2DFirstGame.DrawingHandler
             {
                 if(i == currentlyUp)
                 {
-                    animationLetters[i].Position = new Vector2(starting, animationLetters[i].Position.Y - 10);
+                    animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, animationLetters[i].Position.Y - 10);
                 }
                 else
                 {
-                    animationLetters[i].Position = new Vector2(starting, starting);
+                    animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, starting);
                 }
             }
             currentlyUp--;
@@ -55,8 +56,25 @@ namespace _2DFirstGame.DrawingHandler
 
         private List<LetterToAnimate> CreateAnimationString(Vector2 position, string text)
         {
+            int width = 0;
+            int num;
             List<LetterToAnimate> animation = new List<LetterToAnimate>();
-            text.ToList().ForEach(x => animation.Add(new LetterToAnimate(position, x)));
+            foreach(var item in text)
+            {
+                if (int.TryParse(item.ToString(), out num))    // number
+                {
+
+                }
+                else if (!item.Equals(' '))  // character
+                {
+                    animation.Add(new LetterToAnimate(new Vector2(position.X + width, position.Y), item));
+                    width += drawingHelper.Util.getRect(DrawString.ConvertCharToCharacters(item)).Width;
+                }
+                else    // whitespace
+                {
+                    
+                }
+            }
             return animation;
         }
     }

@@ -17,7 +17,7 @@ namespace _2DFirstGame.DrawingHandler
 
         private float posX;
         private float posY;
-        private StringUtil util;
+        public StringUtil Util;
         private float scale;
 
         public DrawingHelper(SpriteBatch device, Texture2D numbers, Texture2D characters, Texture2D specials)
@@ -26,7 +26,7 @@ namespace _2DFirstGame.DrawingHandler
             this.numbers = numbers;
             this.characters = characters;
             this.specials = specials;
-            util = new StringUtil();
+            Util = new StringUtil();
         }
         public void DrawString(Vector2 position, string text, float scale)
         {
@@ -42,7 +42,7 @@ namespace _2DFirstGame.DrawingHandler
             if (int.TryParse(character.ToString(), out num))    // number
             {
                 Numbers code = String.DrawString.ConvertIntToNumbers(num);
-                Rectangle rect = util.getRect(code);
+                Rectangle rect = Util.getRect(code);
                 String.DrawString.Draw(device, numbers, rect, new Vector2(posX, posY), scale);
                 posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
@@ -52,13 +52,13 @@ namespace _2DFirstGame.DrawingHandler
                 if (Char.ToLower(character) < 97 || Char.ToLower(character) > 122)
                 {
                     Specials code = String.DrawString.ConvertCharToSpecials(character);
-                    rect = util.getRect(code);
+                    rect = Util.getRect(code);
                     String.DrawString.Draw(device, specials, rect, new Vector2(posX, posY), scale);
                 }
                 else
                 {
                     Characters code = String.DrawString.ConvertCharToCharacters(character);
-                    rect = util.getRect(code);
+                    rect = Util.getRect(code);
                     String.DrawString.Draw(device, characters, rect, new Vector2(posX, posY), scale);
                 }
                 posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
