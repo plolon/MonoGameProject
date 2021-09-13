@@ -20,14 +20,14 @@ namespace _2DFirstGame.DrawingHandler
             this.spriteBatch = spriteBatch;
             this.drawingHelper = drawingHelper;
             animationLetters = CreateAnimationString(position, text);
-            starting = position.X;
+            starting = position.Y;
             currentlyUp = animationLetters.Count() - 1;
 
         }
 
         public void Draw()
         {
-           // Animate();
+            Animate();
             foreach(var item in animationLetters)
             {
                 drawingHelper.DrawString(new Vector2(item.Position.X, item.Position.Y), item.Character.ToString(), 1f);
@@ -40,7 +40,7 @@ namespace _2DFirstGame.DrawingHandler
             {
                 if(i == currentlyUp)
                 {
-                    animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, animationLetters[i].Position.Y - 10);
+                    animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, animationLetters[i].Position.Y - 20);
                 }
                 else
                 {

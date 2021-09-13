@@ -31,7 +31,7 @@ namespace _2DFirstGame.DrawingHandler
         public void DrawString(Vector2 position, string text, float scale)
         {
             posX = position.X;
-            posX = position.Y;
+            posY = position.Y;
             this.scale = scale;
             text.ToList().ForEach(x => HandleLetter(x));
         }
