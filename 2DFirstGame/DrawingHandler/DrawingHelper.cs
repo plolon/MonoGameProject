@@ -36,12 +36,6 @@ namespace _2DFirstGame.DrawingHandler
             text.ToList().ForEach(x => HandleLetter(x));
         }
 
-        public void CreateAnimationString(Vector2 position, string text)
-        {
-            List<LetterToAnimate> animation = new List<LetterToAnimate>();
-            text.ToList().ForEach(x => animation.Add(new LetterToAnimate(position, x)));
-        }
-
         private void HandleLetter(char character)
         {
             int num;
