@@ -13,6 +13,7 @@ namespace _2DFirstGame.DrawingHandler
         private int currentlyUp;
         private SpriteBatch spriteBatch;
         private DrawingHelper drawingHelper;
+        private int tick = 0;
 
 
         public AnimationString(SpriteBatch spriteBatch, DrawingHelper drawingHelper, Vector2 position, string text)
@@ -36,22 +37,27 @@ namespace _2DFirstGame.DrawingHandler
 
         private void Animate()
         {
-            for (int i = animationLetters.Count - 1; i >= 0; i--)
+            if(tick==4)
             {
-                if(i == currentlyUp)
+                for (int i = animationLetters.Count - 1; i >= 0; i--)
                 {
-                    animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, animationLetters[i].Position.Y - 20);
+                    if (i == currentlyUp)
+                    {
+                        animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, animationLetters[i].Position.Y - 20);
+                    }
+                    else
+                    {
+                        animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, starting);
+                    }
                 }
-                else
+                currentlyUp--;
+                if (currentlyUp < 0)
                 {
-                    animationLetters[i].Position = new Vector2(animationLetters[i].Position.X, starting);
+                    currentlyUp = animationLetters.Count() - 1;
                 }
+                tick = 0;
             }
-            currentlyUp--;
-            if (currentlyUp < 0)
-            {
-                currentlyUp = animationLetters.Count() - 1;
-            }
+            tick++;
         }
 
         private List<LetterToAnimate> CreateAnimationString(Vector2 position, string text)
