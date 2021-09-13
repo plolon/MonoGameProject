@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace _2DFirstGame
 {
-    public class Game1 : Game
+    public class Game2 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -15,7 +15,7 @@ namespace _2DFirstGame
         private AnimationString _animationString;
 
 
-        public Game1()
+        public Game2()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -31,11 +31,11 @@ namespace _2DFirstGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _drawingHelper = new DrawingHelper(_spriteBatch, 
+            _drawingHelper = new DrawingHelper(_spriteBatch,
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
-            _animationString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "game over");
+            _animationString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
         }
 
         protected override void Update(GameTime gameTime)
