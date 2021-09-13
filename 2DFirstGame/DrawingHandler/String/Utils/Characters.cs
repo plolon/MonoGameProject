@@ -21,6 +21,6 @@
         Forwardslash, Comma, Acute, Open_brace,
         Close_brace, Open_bracket, Close_bracket,
         Exclamation, Pipe, Single_quote,
-        Dot, Colon, Semicolon,
+        Dot, Colon, Semicolon, None,
     }
 }
