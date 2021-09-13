@@ -29,8 +29,10 @@ namespace _2DFirstGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _drawingHelper = new DrawingHelper(_spriteBatch, Content.Load<Texture2D>(@"StringDrawing\Numbers"), Content.Load<Texture2D>(@"StringDrawing\Characters"));
-            // TODO: use this.Content to load your game content here
+            _drawingHelper = new DrawingHelper(_spriteBatch, 
+                Content.Load<Texture2D>(@"StringDrawing\Numbers"),
+                Content.Load<Texture2D>(@"StringDrawing\Characters"),
+                Content.Load<Texture2D>(@"StringDrawing\Specials"));
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,7 +61,7 @@ namespace _2DFirstGame
 
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
-            return $"FPS {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+            return $"FPS: {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
         }
     }
 }
