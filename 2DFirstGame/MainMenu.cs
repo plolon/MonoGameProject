@@ -10,9 +10,16 @@ namespace _2DFirstGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private FPS_Handler _frameCounter;
         private DrawingHelper _drawingHelper;
 
+        private int currentlySelected = 1;
+        private float newGameScale = 0.5f;
+        private float loadGameScale = 0.5f;
+        private float optionsScale = 0.5f;
+
+        private int test;
+
+        private bool isPressed = false;
 
         public MainMenu()
         {
@@ -23,14 +30,13 @@ namespace _2DFirstGame
 
         protected override void Initialize()
         {
-            _frameCounter = new FPS_Handler();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _drawingHelper = new DrawingHelper(_spriteBatch, 
+            _drawingHelper = new DrawingHelper(_spriteBatch,
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
@@ -41,7 +47,17 @@ namespace _2DFirstGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            KeyboardState state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.A))
+            {
+                currentlySelected--;
+            }
+            if (state.IsKeyDown(Keys.D))
+            {
+                currentlySelected++;
+            }
+       
+            changeSelected();
 
             base.Update(gameTime);
         }
@@ -51,21 +67,32 @@ namespace _2DFirstGame
             GraphicsDevice.Clear(Color.Bisque);
 
             _spriteBatch.Begin();
-            string fps = getFPS(gameTime);
-            // TODO: Display fps
-            _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
-            _drawingHelper.DrawString(new Vector2(70, 120), "new game", 0.7f);
-            _drawingHelper.DrawString(new Vector2(70, 240), "load", 0.7f);
-            _drawingHelper.DrawString(new Vector2(70, 360), "options", 0.4f);
+            _drawingHelper.DrawString(new Vector2(100, 100), "new game", newGameScale);
+            _drawingHelper.DrawString(new Vector2(100, 200), "load", loadGameScale);
+            _drawingHelper.DrawString(new Vector2(100, 300), "options", optionsScale);
             _spriteBatch.End();
         }
 
-        private string getFPS(GameTime gameTime)
+        private void changeSelected()
         {
-
-            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _frameCounter.Update(deltaTime);
-            return $"FPS: {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+            switch (currentlySelected)
+            {
+                case 1:
+                    newGameScale = 1f;
+                    loadGameScale = 0.5f;
+                    optionsScale = 0.5f;
+                    break;
+                case 2:
+                    loadGameScale = 1f;
+                    newGameScale = 0.5f;
+                    optionsScale = 0.5f;
+                    break;
+                case 3:
+                    optionsScale = 1f;
+                    newGameScale = 0.5f;
+                    loadGameScale = 0.5f;
+                    break;
+            }
         }
     }
 }
