@@ -44,19 +44,19 @@ namespace _2DFirstGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            KeyboardState state = Keyboard.GetState();
-            if (state.IsKeyDown(Keys.A))
+            Utils.Keyboard.GetState();
+            if (Utils.Keyboard.HasBeenPressed(Keys.Up))
             {
                 currentlySelected--;
             }
-            if (state.IsKeyDown(Keys.D))
+            if (Utils.Keyboard.HasBeenPressed(Keys.Down))
             {
                 currentlySelected++;
             }
-       
+
             changeSelected();
 
             base.Update(gameTime);
