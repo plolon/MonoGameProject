@@ -47,8 +47,17 @@ namespace _2DFirstGame.DrawingHandler
             }
             else if (!character.Equals(' '))  // character
             {
-                Characters code = String.DrawString.ConvertCharToCharacters(character);
-                Rectangle rect = util.getRect(code);
+                Rectangle rect;
+                if (character < 0 || character > 122)
+                {
+                    Specials code = String.DrawString.ConvertCharToSpecials(character);
+                    rect = util.getRect(code);
+                }
+                else
+                {
+                    Characters code = String.DrawString.ConvertCharToCharacters(character);
+                    rect = util.getRect(code);
+                }
                 String.DrawString.Draw(device, characters, rect, new Vector2(posX, posY), scale);
                 posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
