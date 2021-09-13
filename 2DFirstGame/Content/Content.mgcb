@@ -37,7 +37,7 @@
 /processorParam:TextureFormat=Color
 /build:StringDrawing/Numbers.png
 
-#begin StringDrawing/Special.png
+#begin StringDrawing/Specials.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,5 +47,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:StringDrawing/Special.png
+/build:StringDrawing/Specials.png
 

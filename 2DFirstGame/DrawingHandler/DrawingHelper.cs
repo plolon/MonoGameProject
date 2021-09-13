@@ -11,7 +11,7 @@ namespace _2DFirstGame.DrawingHandler
     {
         private Texture2D numbers;
         private Texture2D characters;
-        private Texture2D special;
+        private Texture2D specials;
         private SpriteBatch device;
 
         private float posX;
@@ -19,12 +19,12 @@ namespace _2DFirstGame.DrawingHandler
         private StringUtil util;
         private float scale;
 
-        public DrawingHelper(SpriteBatch device, Texture2D numbers, Texture2D characters, Texture2D special)
+        public DrawingHelper(SpriteBatch device, Texture2D numbers, Texture2D characters, Texture2D specials)
         {
             this.device = device;
             this.numbers = numbers;
             this.characters = characters;
-            this.special = special;
+            this.specials = specials;
             util = new StringUtil();
         }
         public void DrawString(Vector2 position, string text, float scale)
@@ -48,17 +48,18 @@ namespace _2DFirstGame.DrawingHandler
             else if (!character.Equals(' '))  // character
             {
                 Rectangle rect;
-                if (character < 0 || character > 122)
+                if (Char.ToLower(character) < 97 || Char.ToLower(character) > 122)
                 {
                     Specials code = String.DrawString.ConvertCharToSpecials(character);
                     rect = util.getRect(code);
+                    String.DrawString.Draw(device, specials, rect, new Vector2(posX, posY), scale);
                 }
                 else
                 {
                     Characters code = String.DrawString.ConvertCharToCharacters(character);
                     rect = util.getRect(code);
+                    String.DrawString.Draw(device, characters, rect, new Vector2(posX, posY), scale);
                 }
-                String.DrawString.Draw(device, characters, rect, new Vector2(posX, posY), scale);
                 posX += (float)Math.Ceiling((decimal)((rect.Width * scale) + (3 * scale)));
             }
             else    // whitespace

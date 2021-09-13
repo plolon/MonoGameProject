@@ -61,7 +61,7 @@ namespace _2DFirstGame
 
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
-            return $"FPS {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+            return $"FPS: {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
         }
     }
 }

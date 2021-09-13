@@ -25,71 +25,71 @@ namespace _2DFirstGame.DrawingHandler.String
         }
         public static Specials ConvertCharToSpecials(char character)
         {
-            switch (character)
+            switch (character.ToString())
             {
-                case '#':
+                case "#":
                     return Specials.Hash;
-                case '$':
+                case "$":
                     return Specials.Dollar;
-                case '%':
+                case "%":
                     return Specials.Percent;
-                case '&':
+                case "&":
                     return Specials.Ampersand;
-                case '?':
+                case "?":
                     return Specials.Question;
-                case '@':
+                case "@":
                     return Specials.At;
-                case '~':
+                case "~":
                     return Specials.Tilde;
-                case '^':
+                case "^":
                     return Specials.Caret;
-                case '+':
+                case "+":
                     return Specials.Plus;
-                case '"':
+                case "\"":
                     return Specials.Double_Quote;
-                case '<':
+                case "<":
                     return Specials.Greater;
-                case '=':
+                case "=":
                     return Specials.Equal;
-                case '>':
+                case ">":
                     return Specials.Less;
-                case '(':
+                case "(":
                     return Specials.Open_parenthesis;
-                case ')':
+                case ")":
                     return Specials.Close_parenthesis;
-                case '*':
+                case "*":
                     return Specials.Asterisk;
-                case '-':
+                case "-":
                     return Specials.Minus;
-                case '\\':
+                case @"\":
                     return Specials.Backslash;
-                case '_':
+                case "_":
                     return Specials.Underscore;
-                case '/':
+                case "/":
                     return Specials.Forwardslash;
-                case ',':
+                case ",":
                     return Specials.Comma;
-                case '`':
+                case "`":
                     return Specials.Acute;
-                case '{':
+                case "{":
                     return Specials.Open_brace;
-                case '}':
+                case "}":
                     return Specials.Close_brace;
-                case '[':
+                case "[":
                     return Specials.Open_bracket;
-                case ']':
+                case "]":
                     return Specials.Close_bracket;
-                case '!':
+                case "!":
                     return Specials.Exclamation;
-                case '|':
+                case "|":
                     return Specials.Pipe;
-                case '\'':
-                    return Specials.Forwardslash;
-                case '.':
+                case "'":
+                    return Specials.Single_quote;
+                case ".":
                     return Specials.Dot;
-                case ':':
+                case ":":
                     return Specials.Colon;
-                case ';':
+                case ";":
                     return Specials.Semicolon;
             }
             return Specials.None;
