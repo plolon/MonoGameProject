@@ -1,0 +1,71 @@
+﻿using _2DFirstGame.DrawingHandler;
+using _2DFirstGame.Utils;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace _2DFirstGame
+{
+    public class MainMenu : Game
+    {
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private FPS_Handler _frameCounter;
+        private DrawingHelper _drawingHelper;
+
+
+        public MainMenu()
+        {
+            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+        }
+
+        protected override void Initialize()
+        {
+            _frameCounter = new FPS_Handler();
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _drawingHelper = new DrawingHelper(_spriteBatch, 
+                Content.Load<Texture2D>(@"StringDrawing\Numbers"),
+                Content.Load<Texture2D>(@"StringDrawing\Characters"),
+                Content.Load<Texture2D>(@"StringDrawing\Specials"));
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            // TODO: Add your update logic here
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Bisque);
+
+            _spriteBatch.Begin();
+            string fps = getFPS(gameTime);
+            // TODO: Display fps
+            _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
+            _drawingHelper.DrawString(new Vector2(70, 120), "new game", 0.7f);
+            _drawingHelper.DrawString(new Vector2(70, 240), "load", 0.7f);
+            _drawingHelper.DrawString(new Vector2(70, 360), "options", 0.4f);
+            _spriteBatch.End();
+        }
+
+        private string getFPS(GameTime gameTime)
+        {
+
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _frameCounter.Update(deltaTime);
+            return $"FPS: {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+        }
+    }
+}
