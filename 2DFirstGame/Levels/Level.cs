@@ -80,31 +80,36 @@ namespace _2DFirstGame.Tiles
                     switch (ch)
                     {
                         case 'L':
+                            DrawGround(x+16, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left)));
                             break;
                         case 'R':
+                            DrawGround(x-16, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right)));
                             break;
                         case 'U':
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Up)));
                             break;
                         case 'D':
+                            DrawGround(x, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Down)));
                             break;
                         case 'j':
+                            DrawGround(x, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Down)));
                             break;
                         case 'q':
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Up)));
                             break;
                         case 'l':
+                            DrawGround(x, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Down)));
                             break;
                         case 'p':
                             Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Up)));
                             break;
                         case '_':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Clear), true));
+                            DrawGround(x, y);
                             break;
                         default:
                             continue;
@@ -112,6 +117,10 @@ namespace _2DFirstGame.Tiles
                     x += 64;
                 }
             }
+        }
+        private void DrawGround(int x, int y)
+        {
+            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Clear), true));
         }
     }
 }
