@@ -1,4 +1,5 @@
 ﻿using _2DFirstGame.DrawingHandler;
+using _2DFirstGame.Tiles;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,6 +17,8 @@ namespace _2DFirstGame
 
         private AnimationString gameOverString;
         private bool isGameOver = false;
+
+        private Level level0;
 
         public Game2()
         {
@@ -38,6 +41,8 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
             gameOverString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
+            level0 = new Level(_spriteBatch, @"levels\level0.txt", Content.Load<Texture2D>(@"Textures\walls"), Content.Load<Texture2D>(@"Textures\floor"));
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,7 +60,7 @@ namespace _2DFirstGame
             GraphicsDevice.Clear(Color.Bisque);
 
             _spriteBatch.Begin();
-            string fps = getFPS(gameTime);
+            //string fps = getFPS(gameTime);
 
             if (isGameOver)
             {
@@ -63,8 +68,8 @@ namespace _2DFirstGame
             }
             else
             {
-                
-                _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
+                level0.Draw();
+               // _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
             }
             _spriteBatch.End();
         }

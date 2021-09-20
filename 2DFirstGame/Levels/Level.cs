@@ -1,6 +1,7 @@
 ﻿using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace _2DFirstGame.Tiles
 
         public Level(SpriteBatch device, string path, Texture2D walls, Texture2D grounds)
         {
+            Tiles = new List<Tile>();
+            texturesUtil = new TexturesUtil();
             this.walls = walls; // TODO something better to contain textures
             this.grounds = grounds; // TODO something better to contain textures
             this.device = device;
@@ -29,7 +32,7 @@ namespace _2DFirstGame.Tiles
 
         public void Draw()
         {
-            foreach(var tile in Tiles)
+            foreach (var tile in Tiles)
             {
                 Vector2 position = new Vector2(tile.Rectangle.X, tile.Rectangle.Y);
                 if (tile.GetType().Name.Equals("Wall"))
@@ -72,37 +75,42 @@ namespace _2DFirstGame.Tiles
             int x = 0;
             foreach (var ch in row)
             {
-                switch (ch)
+                if (!String.IsNullOrEmpty(ch.ToString()))
                 {
-                    case 'L':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left)));
-                        break;
-                    case 'R':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right)));
-                        break;
-                    case 'U':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Up)));
-                        break;
-                    case 'D':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Down)));
-                        break;
-                    case 'j':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Down)));
-                        break;
-                    case 'q':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Up)));
-                        break;
-                    case 'l':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Down)));
-                        break;
-                    case 'p':
-                        Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Up)));
-                        break;
-                    case '_':
-                        Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Clear), true));
-                        break;
+                    switch (ch)
+                    {
+                        case 'L':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left)));
+                            break;
+                        case 'R':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right)));
+                            break;
+                        case 'U':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Up)));
+                            break;
+                        case 'D':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Down)));
+                            break;
+                        case 'j':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Down)));
+                            break;
+                        case 'q':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Up)));
+                            break;
+                        case 'l':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Down)));
+                            break;
+                        case 'p':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Up)));
+                            break;
+                        case '_':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Clear), true));
+                            break;
+                        default:
+                            continue;
+                    }
+                    x += 64;
                 }
-                x += 64;
             }
         }
     }
