@@ -59,7 +59,8 @@ namespace _2DFirstGame.DrawingHandler
         {
             foreach(var tile in tiles)
             {
-                device.Draw(texture, tile, Color.White);
+                Rectangle rect = new Rectangle(tile.X + currentXPos, tile.Y + currentYPos, tile.Width, tile.Height);
+                device.Draw(texture, rect, Color.White);
             }
         }
 
