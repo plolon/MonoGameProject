@@ -1,0 +1,15 @@
+LEGENDA:
+koniec linii = ,
+lewa ściana - L
+prawa ściana - R
+górna ściana - U
+dolna ściana - D
+prawy dolny róg - j
+prawy górny róg - q
+lewy dolny róg - l
+lewy górny róg - p
+podłoga - _
+podłoga jasna - -
+brama górna - G
+brama dolna - g
+brama boczna - h
