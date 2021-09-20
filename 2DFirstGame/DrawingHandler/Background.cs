@@ -27,9 +27,9 @@ namespace _2DFirstGame.DrawingHandler
             List<Rectangle> result = new List<Rectangle>();
             int rows = _width / width;
             int columns = _height / height;
-            for (int i = 0; i < rows; i += width)
+            for (int i = 0; i <_width; i += width)
             {
-                for (int j = 0; j < columns; j += height)
+                for (int j = 0; j <= _height; j += height)
                 {
                     result.Add(new Rectangle(i, j, width, height));
                 }
