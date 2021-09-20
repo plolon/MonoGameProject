@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 
-namespace 2DFirstGame.Tiles
+namespace _2DFirstGame.Tiles
 {
-    class Tile
-{
-}
+    public class Tile
+    {
+        public Rectangle Rectangle { get; set; }
+        public Rectangle Source { get; set; }
+    }
 }
