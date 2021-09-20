@@ -16,4 +16,16 @@ namespace _2DFirstGame.Utils
             return result;
         }
     }
+
+    public enum Walls
+    {
+        Left,
+        Right,
+        Up,
+        Down,
+        Left_Up,
+        Left_Down,
+        Right_Up,
+        Right_Down
+    }
 }

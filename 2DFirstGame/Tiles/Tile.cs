@@ -8,9 +8,9 @@ namespace _2DFirstGame.Tiles
         public Rectangle Source { get; set; }
         public bool CanWalk { get; set; }
 
-        public void Draw()
+        public Tile(Rectangle source)
         {
-
+            Source = source;
         }
     }
 }

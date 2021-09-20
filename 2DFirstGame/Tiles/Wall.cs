@@ -1,8 +1,11 @@
-﻿namespace _2DFirstGame.Tiles
+﻿
+using Microsoft.Xna.Framework;
+
+namespace _2DFirstGame.Tiles
 {
     public class Wall : Tile
     {
-        public Wall()
+        public Wall(Rectangle source) : base(source)
         {
             CanWalk = false;
         }
