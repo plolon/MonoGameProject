@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using _2DFirstGame.Utils;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -9,18 +10,49 @@ namespace _2DFirstGame.DrawingHandler
         private Texture2D texture;
         private List<Rectangle> tiles;
 
-        int currentPos;
+        int currentXPos;
+        int currentYPos;
 
         public Background(Texture2D texture, int width, int height)
         {
-            currentPos = 0;
+            currentXPos = 0;
+            currentYPos = 0;
             this.texture = texture;
             tiles = CreateTiles(width, height, texture.Width, texture.Height);
         }
 
-        public void Move()
+        public void Move(Direction direction)
         {
+            switchDirection(direction);
+            if(currentXPos == 64 && currentXPos == -64)
+            {
+                currentXPos = 0;
+            }
+            if (currentYPos == 64 && currentYPos == -64)
+            {
+                currentYPos = 0;
+            }
+        }
 
+        private void switchDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Up:
+                    currentYPos -= 2;
+                    break;
+                case Direction.Down:
+                    currentYPos += 2;
+                    break;
+                case Direction.Right:
+                    currentXPos += 2;
+                    break;
+                case Direction.Left:
+                    currentXPos -= 2;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch device)
