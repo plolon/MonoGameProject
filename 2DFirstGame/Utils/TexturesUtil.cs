@@ -4,9 +4,28 @@ using System.Collections.Generic;
 
 namespace _2DFirstGame.Utils
 {
-    public static class TexturesUtil
+    public class TexturesUtil
     {
-        public static List<Rectangle> GetWallSource(Texture2D texture)
+        private List<Rectangle> walls;
+        private List<Rectangle> grounds;
+
+        public TexturesUtil()
+        {
+            walls = GetWallSource();
+            grounds = new List<Rectangle>() { new Rectangle(0, 0, 64, 64) };
+        }
+
+        public Rectangle GetSource(Walls wallType)
+        {
+            return walls[(int)wallType];
+        }
+        public Rectangle GetSource(Grounds groundType)
+        {
+            return grounds[(int)groundType];
+        }
+
+
+        private List<Rectangle> GetWallSource()
         {
             List<Rectangle> result = new List<Rectangle>();
             for(int i=0; i<512; i += 64)
@@ -27,5 +46,9 @@ namespace _2DFirstGame.Utils
         Left_Down,
         Right_Up,
         Right_Down
+    }
+    public enum Grounds
+    {
+        Clear,
     }
 }
