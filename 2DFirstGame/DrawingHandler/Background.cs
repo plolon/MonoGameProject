@@ -8,10 +8,19 @@ namespace _2DFirstGame.DrawingHandler
     {
         private Texture2D texture;
         private List<Rectangle> tiles;
+
+        int currentPos;
+
         public Background(Texture2D texture, int width, int height)
         {
+            currentPos = 0;
             this.texture = texture;
             tiles = CreateTiles(width, height, texture.Width, texture.Height);
+        }
+
+        public void Move()
+        {
+
         }
 
         public void Draw(SpriteBatch device)
@@ -27,9 +36,9 @@ namespace _2DFirstGame.DrawingHandler
             List<Rectangle> result = new List<Rectangle>();
             int rows = _width / width;
             int columns = _height / height;
-            for (int i = 0; i <_width; i += width)
+            for (int i = -width; i <_width + width; i += width)
             {
-                for (int j = 0; j <= _height; j += height)
+                for (int j = -width; j <= _height + height; j += height)
                 {
                     result.Add(new Rectangle(i, j, width, height));
                 }
