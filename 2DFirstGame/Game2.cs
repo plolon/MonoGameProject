@@ -14,7 +14,6 @@ namespace _2DFirstGame
         private FPS_Handler _frameCounter;
         private DrawingHelper _drawingHelper;
 
-        private Background background;
         private AnimationString gameOverString;
         private bool isGameOver = false;
 
@@ -39,7 +38,6 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
             gameOverString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
-            background = new Background(Content.Load<Texture2D>(@"Textures\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
         }
 
         protected override void Update(GameTime gameTime)
@@ -48,22 +46,6 @@ namespace _2DFirstGame
                 Exit();
 
             Utils.Keyboard.GetState();
-            if (Utils.Keyboard.IsPressed(Keys.Up) || Utils.Keyboard.IsPressed(Keys.W))
-            {
-                background.Move(Direction.Down);
-            }
-            if (Utils.Keyboard.IsPressed(Keys.Down) || Utils.Keyboard.IsPressed(Keys.S))
-            {
-                background.Move(Direction.Up);
-            }
-            if (Utils.Keyboard.IsPressed(Keys.Right) || Utils.Keyboard.IsPressed(Keys.D))
-            {
-                background.Move(Direction.Left);
-            }
-            if (Utils.Keyboard.IsPressed(Keys.Left) || Utils.Keyboard.IsPressed(Keys.A))
-            {
-                background.Move(Direction.Right);
-            }
 
             base.Update(gameTime);
         }
@@ -81,7 +63,7 @@ namespace _2DFirstGame
             }
             else
             {
-                background.Draw(_spriteBatch);
+                
                 _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
             }
             _spriteBatch.End();

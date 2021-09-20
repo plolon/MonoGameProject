@@ -7,5 +7,10 @@ namespace _2DFirstGame.Tiles
         public Rectangle Rectangle { get; set; }
         public Rectangle Source { get; set; }
         public bool CanWalk { get; set; }
+
+        public void Draw()
+        {
+
+        }
     }
 }

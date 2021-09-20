@@ -12,6 +12,8 @@ namespace _2DFirstGame
         private SpriteBatch _spriteBatch;
         private DrawingHelper _drawingHelper;
 
+        private Background background;
+
         private int currentlySelected = 1;
         private float newGameScale = 0.5f;
         private float loadGameScale = 0.5f;
@@ -40,6 +42,7 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
+            background = new Background(Content.Load<Texture2D>(@"Textures\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,6 +70,7 @@ namespace _2DFirstGame
             GraphicsDevice.Clear(Color.Bisque);
 
             _spriteBatch.Begin();
+            background.Draw(_spriteBatch);
             _drawingHelper.DrawString(new Vector2(100, 100), "new game", newGameScale);
             _drawingHelper.DrawString(new Vector2(100, 200), "load", loadGameScale);
             _drawingHelper.DrawString(new Vector2(100, 300), "options", optionsScale);
