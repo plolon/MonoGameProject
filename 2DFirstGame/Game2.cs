@@ -12,8 +12,9 @@ namespace _2DFirstGame
         private SpriteBatch _spriteBatch;
         private FPS_Handler _frameCounter;
         private DrawingHelper _drawingHelper;
-        private AnimationString _animationString;
 
+        private AnimationString gameOverString;
+        private bool isGameOver = false;
 
         public Game2()
         {
@@ -35,7 +36,7 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
-            _animationString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
+            gameOverString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
         }
 
         protected override void Update(GameTime gameTime)
@@ -56,7 +57,14 @@ namespace _2DFirstGame
             string fps = getFPS(gameTime);
             // TODO: Display fps
             _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
-            _animationString.Draw();
+            if (isGameOver)
+            {
+                gameOverString.Draw();
+            }
+            else
+            {
+
+            }
             _spriteBatch.End();
         }
 
