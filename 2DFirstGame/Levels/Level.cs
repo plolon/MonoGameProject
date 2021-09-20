@@ -20,6 +20,10 @@ namespace _2DFirstGame.Tiles
         private int CurrentX;   // TODO moving tiles with adding current X to drowing
         private int CurrentY;
 
+        private const float scale = 2f;
+        private const int width = (int)(64 * scale);
+        private const int height = (int)(64 * scale);
+        private const int modifier = (int)(16 * scale);
         public Level(SpriteBatch device, string path, Texture2D walls, Texture2D grounds)
         {
             Tiles = new List<Tile>();
@@ -34,14 +38,18 @@ namespace _2DFirstGame.Tiles
         {
             foreach (var tile in Tiles)
             {
-                Vector2 position = new Vector2(tile.Rectangle.X, tile.Rectangle.Y);
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
+                if (tile.GetType().Name.Equals("Ground"))
+                {
+                    device.Draw(grounds, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                }
+            }
+            foreach (var tile in Tiles)
+            {
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Wall"))
                 {
-                    device.Draw(walls, position, tile.Source, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 0f);
-                }
-                else if (tile.GetType().Name.Equals("Ground"))
-                {
-                    device.Draw(grounds, position, tile.Source, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 0f);
+                    device.Draw(walls, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
         }
@@ -49,7 +57,18 @@ namespace _2DFirstGame.Tiles
         {
             switch (direction)
             {
-                // move every tiles
+                case Direction.Up:
+                    CurrentY -= 2;
+                    break;
+                case Direction.Down:
+                    CurrentY += 2;
+                    break;
+                case Direction.Left:
+                    CurrentX -= 2;
+                    break;
+                case Direction.Right:
+                    CurrentX += 2;
+                    break;
             }
         }
 
@@ -66,7 +85,7 @@ namespace _2DFirstGame.Tiles
             foreach (var row in rows)
             {
                 HandleRow(row, y);
-                y += 64;
+                y += height;
             }
         }
 
@@ -80,33 +99,33 @@ namespace _2DFirstGame.Tiles
                     switch (ch)
                     {
                         case 'L':
-                            DrawGround(x+16, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left)));
+                            DrawGround(x + modifier, y);
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left)));
                             break;
                         case 'R':
-                            DrawGround(x-16, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right)));
+                            DrawGround(x - modifier, y);
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right)));
                             break;
                         case 'U':
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Up)));
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Up)));
                             break;
                         case 'D':
-                            DrawGround(x, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Down)));
+                            DrawGround(x, y - modifier);
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Down)));
                             break;
                         case 'j':
-                            DrawGround(x, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Down)));
+                            DrawGround(x - modifier, y - modifier);
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Down)));
                             break;
                         case 'q':
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Right_Up)));
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Up)));
                             break;
                         case 'l':
-                            DrawGround(x, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Down)));
+                            DrawGround(x + modifier, y - modifier);
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Down)));
                             break;
                         case 'p':
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Left_Up)));
+                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Up)));
                             break;
                         case '_':
                             DrawGround(x, y);
@@ -114,13 +133,13 @@ namespace _2DFirstGame.Tiles
                         default:
                             continue;
                     }
-                    x += 64;
+                    x += width;
                 }
             }
         }
         private void DrawGround(int x, int y)
         {
-            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Clear), true));
+            Tiles.Add(new Ground(new Rectangle(x, y, width, height), texturesUtil.GetSource(Grounds.Clear), true));
         }
     }
 }

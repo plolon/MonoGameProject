@@ -51,13 +51,28 @@ namespace _2DFirstGame
                 Exit();
 
             Utils.Keyboard.GetState();
-
+            if (Utils.Keyboard.IsPressed(Keys.Up) || Utils.Keyboard.IsPressed(Keys.W))
+            {
+                level0.Update(Direction.Down);
+            }
+            if (Utils.Keyboard.IsPressed(Keys.Down) || Utils.Keyboard.IsPressed(Keys.S))
+            {
+                level0.Update(Direction.Up);
+            }
+            if (Utils.Keyboard.IsPressed(Keys.Right) || Utils.Keyboard.IsPressed(Keys.D))
+            {
+                level0.Update(Direction.Left);
+            }
+            if (Utils.Keyboard.IsPressed(Keys.Left) || Utils.Keyboard.IsPressed(Keys.A))
+            {
+                level0.Update(Direction.Right);
+            }
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Bisque);
+            GraphicsDevice.Clear(Color.Black);
 
             _spriteBatch.Begin();
             //string fps = getFPS(gameTime);
@@ -69,7 +84,7 @@ namespace _2DFirstGame
             else
             {
                 level0.Draw();
-               // _drawingHelper.DrawString(new Vector2(15, 15), getFPS(gameTime), 0.3f);
+               _drawingHelper.DrawString(new Vector2(10, 10), getFPS(gameTime), 0.2f);
             }
             _spriteBatch.End();
         }
