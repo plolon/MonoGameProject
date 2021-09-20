@@ -10,19 +10,38 @@ namespace _2DFirstGame.Tiles
     public class Level : ILevel
     {
         public List<Tile> Tiles { get; set; }
+        private Texture2D walls;
+        private Texture2D grounds;
 
         private SpriteBatch device;
         private TexturesUtil texturesUtil;
 
-        private int CurrentX;
+        private int CurrentX;   // TODO moving tiles with adding current X to drowing
         private int CurrentY;
 
-        public Level(SpriteBatch device, string path)
+        public Level(SpriteBatch device, string path, Texture2D walls, Texture2D grounds)
         {
+            this.walls = walls; // TODO something better to contain textures
+            this.grounds = grounds; // TODO something better to contain textures
             this.device = device;
             ReadLevelFile(path);
         }
 
+        public void Draw()
+        {
+            foreach(var tile in Tiles)
+            {
+                Vector2 position = new Vector2(tile.Rectangle.X, tile.Rectangle.Y);
+                if (tile.GetType().Name.Equals("Wall"))
+                {
+                    device.Draw(walls, position, tile.Source, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 0f);
+                }
+                else if (tile.GetType().Name.Equals("Ground"))
+                {
+                    device.Draw(grounds, position, tile.Source, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 0f);
+                }
+            }
+        }
         public void Update(Direction direction)
         {
             switch (direction)
@@ -37,6 +56,7 @@ namespace _2DFirstGame.Tiles
             using (StreamReader file = new StreamReader(path))
             {
                 input = file.ReadToEnd();
+                file.Close();
             }
             var rows = input.Split(',').ToList();
             int y = 0;
@@ -84,17 +104,6 @@ namespace _2DFirstGame.Tiles
                 }
                 x += 64;
             }
-        }
-        /*
-         prawy dolny róg - j
-prawy górny róg - q
-lewy dolny róg - l
-lewy górny róg - p
-         * */
-
-        public void Draw()
-        {
-            //todo draw every tile with foreach
         }
     }
 }
