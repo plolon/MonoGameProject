@@ -46,7 +46,23 @@ namespace _2DFirstGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            Utils.Keyboard.GetState();
+            if (Utils.Keyboard.IsPressed(Keys.Up) || Utils.Keyboard.IsPressed(Keys.W))
+            {
+                background.Move(Direction.Down);
+            }
+            if (Utils.Keyboard.IsPressed(Keys.Down) || Utils.Keyboard.IsPressed(Keys.S))
+            {
+                background.Move(Direction.Up);
+            }
+            if (Utils.Keyboard.IsPressed(Keys.Right) || Utils.Keyboard.IsPressed(Keys.D))
+            {
+                background.Move(Direction.Left);
+            }
+            if (Utils.Keyboard.IsPressed(Keys.Left) || Utils.Keyboard.IsPressed(Keys.A))
+            {
+                background.Move(Direction.Right);
+            }
 
             base.Update(gameTime);
         }

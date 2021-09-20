@@ -24,11 +24,11 @@ namespace _2DFirstGame.DrawingHandler
         public void Move(Direction direction)
         {
             switchDirection(direction);
-            if(currentXPos == 64 && currentXPos == -64)
+            if(currentXPos == 64 || currentXPos == -64)
             {
                 currentXPos = 0;
             }
-            if (currentYPos == 64 && currentYPos == -64)
+            if (currentYPos == 64 || currentYPos == -64)
             {
                 currentYPos = 0;
             }
