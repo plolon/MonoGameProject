@@ -78,8 +78,9 @@ namespace _2DFirstGame.Utils
     {
         Right,
         Left,
-        Up,
         Down,
+        Up,
+        Solid,
     }
     public enum Grounds
     {

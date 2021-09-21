@@ -112,16 +112,19 @@ namespace _2DFirstGame.Tiles
                             AddGroundTile(x, y);
                             break;
                         case '1':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
-                            break;
-                        case '2':
                             Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Right)));
                             break;
+                        case '2':
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
+                            break;
                         case '3':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Up)));
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Down)));
                             break;
                         case '4':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Up)));
+                            break;
+                        case '5':
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Solid)));
                             break;
                         default:
                             continue;
