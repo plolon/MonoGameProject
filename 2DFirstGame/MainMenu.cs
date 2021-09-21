@@ -1,4 +1,5 @@
 ﻿using _2DFirstGame.DrawingHandler;
+using _2DFirstGame.DrawingHandler.String.Utils;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
