@@ -8,6 +8,7 @@ namespace _2DFirstGame.Sounds
         {
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
         }
         /// <summary>
         /// Max volume = 1f

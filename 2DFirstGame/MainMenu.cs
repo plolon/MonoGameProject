@@ -62,12 +62,12 @@ namespace _2DFirstGame
             }
 
             changeSelected();
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            Logger.Info($"{_graphics.PreferredBackBufferWidth}, {_graphics.PreferredBackBufferHeight}", null);
             GraphicsDevice.Clear(Color.Bisque);
 
             _spriteBatch.Begin();

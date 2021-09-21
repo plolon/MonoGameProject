@@ -75,14 +75,6 @@ namespace _2DFirstGame
             {
                 level0.Update(Direction.Right);
             }
-
-            if(Utils.Keyboard.GetState().GetPressedKeys() != null)
-            {
-                foreach(var key in Utils.Keyboard.GetState().GetPressedKeys())
-                {
-                    Logger.Info($"Pressed: {key.ToString()}", System.ConsoleColor.Red);
-                }
-            }
             base.Update(gameTime);
         }
 

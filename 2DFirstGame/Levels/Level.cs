@@ -1,4 +1,5 @@
-﻿using _2DFirstGame.Utils;
+﻿using _2DFirstGame.DrawingHandler.String.Utils;
+using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,41 +15,62 @@ namespace _2DFirstGame.Tiles
 
         private TexturesUtil texturesUtil;
 
-        private int CurrentX;   // TODO moving tiles with adding current X to drowing
+        private int CurrentX;
         private int CurrentY;
 
-        private const float scale = 1f;
+        private const float scale = 2f;
         private const int width = (int)(64 * scale);
         private const int height = (int)(64 * scale);
         private const int modifier = (int)(16 * scale);
+
+        private int maxX;
+        private int maxY;
+
         public Level(TexturesUtil textureUtil, string path)
         {
             Tiles = new List<Tile>();
             texturesUtil = textureUtil;
             ReadLevelFile(path);
+            GetMaxValues();
+        }
+
+        private void GetMaxValues()
+        {
+            Rectangle lastTile = Tiles[Tiles.Count - 1].Rectangle;
+            maxX = 0 - (lastTile.X + lastTile.Width - Config.Width);
+            maxY = 0 - (lastTile.Y + lastTile.Height - Config.Height);
         }
 
         public void Draw()
         {
+            Logger.Info($"{CurrentX} {CurrentY}", ConsoleColor.Green);
             DrawGround();
             DrawWalls();
             DrawInside_Walls();
         }
         public void Update(Direction direction)
         {
+            var tmp = Tiles[Tiles.Count - 1].Rectangle.X + Tiles[Tiles.Count - 1].Rectangle.Width;
+            var tmp2 = tmp - 800;
+            Logger.Info($"{tmp2}", ConsoleColor.Red);
+
             switch (direction)
             {
                 case Direction.Up:
-                    CurrentY -= 2;
+                    if (CurrentY > maxY)
+                        CurrentY -= 2;
                     break;
                 case Direction.Down:
-                    CurrentY += 2;
+                    if (CurrentY < 0)
+                        CurrentY += 2;
                     break;
                 case Direction.Left:
-                    CurrentX -= 2;
+                    if (CurrentX > maxX)
+                        CurrentX -= 2;
                     break;
                 case Direction.Right:
-                    CurrentX += 2;
+                    if (CurrentX < 0)
+                        CurrentX += 2;
                     break;
             }
         }
