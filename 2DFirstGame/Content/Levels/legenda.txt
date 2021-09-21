@@ -9,7 +9,7 @@ prawy górny róg - q
 lewy dolny róg - l
 lewy górny róg - p
 podłoga - _
-podłoga jasna - -
-brama górna - G
-brama dolna - g
-brama boczna - h
+lewa sciana in - 1
+prawa sciana in - 2
+gorna sciana in - 3
+gorna sciana in - 4
