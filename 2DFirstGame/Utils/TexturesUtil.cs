@@ -10,8 +10,20 @@ namespace _2DFirstGame.Utils
         private List<Rectangle> grounds;
         private List<Rectangle> inside_walls;
 
-        public TexturesUtil()
+        public SpriteBatch Device { get; set; }
+
+        public Texture2D WallsT { get; set; }
+        public Texture2D GroundsT { get; set; }
+        public Texture2D Inside_wallsT { get; set; }
+
+        public TexturesUtil(SpriteBatch device, Texture2D wallsT, Texture2D groundsT, Texture2D inside_wallsT)
         {
+            Device = device;
+
+            WallsT = wallsT;
+            GroundsT = groundsT;
+            Inside_wallsT = inside_wallsT;
+
             walls = GetWallSource();
             inside_walls = GetInside_WallSource();
             grounds = new List<Rectangle>() { new Rectangle(0, 0, 64, 64) };
@@ -27,7 +39,7 @@ namespace _2DFirstGame.Utils
         }
         public Rectangle GetSource(Inside_Walls wallType)
         {
-            return grounds[(int)wallType];
+            return inside_walls[(int)wallType];
         }
 
 

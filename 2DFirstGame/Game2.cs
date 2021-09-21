@@ -15,6 +15,7 @@ namespace _2DFirstGame
         private SpriteBatch _spriteBatch;
         private FPS_Handler _frameCounter;
         private DrawingHelper _drawingHelper;
+        private TexturesUtil texturesUtil;
 
         private AnimationString gameOverString;
         private bool isGameOver = false;
@@ -43,7 +44,11 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
             gameOverString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
-            level0 = new Level(_spriteBatch, @"levels\level0.txt", Content.Load<Texture2D>(@"Textures\walls"), Content.Load<Texture2D>(@"Textures\floor"));
+            texturesUtil = new TexturesUtil(_spriteBatch,
+                Content.Load<Texture2D>(""),
+                Content.Load<Texture2D>(""),
+                Content.Load<Texture2D>(""));
+            level0 = new Level(texturesUtil, @"levels\level0.txt");
             
         }
 

@@ -14,7 +14,6 @@ namespace _2DFirstGame.Tiles
         private Texture2D walls;
         private Texture2D grounds;
 
-        private SpriteBatch device;
         private TexturesUtil texturesUtil;
 
         private int CurrentX;   // TODO moving tiles with adding current X to drowing
@@ -24,13 +23,10 @@ namespace _2DFirstGame.Tiles
         private const int width = (int)(64 * scale);
         private const int height = (int)(64 * scale);
         private const int modifier = (int)(16 * scale);
-        public Level(SpriteBatch device, string path, Texture2D walls, Texture2D grounds)
+        public Level(TexturesUtil textureUtil, string path)
         {
             Tiles = new List<Tile>();
-            texturesUtil = new TexturesUtil();
-            this.walls = walls; // TODO something better to contain textures
-            this.grounds = grounds; // TODO something better to contain textures
-            this.device = device;
+            texturesUtil = textureUtil;
             ReadLevelFile(path);
         }
 
@@ -41,7 +37,7 @@ namespace _2DFirstGame.Tiles
                 Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Ground"))
                 {
-                    device.Draw(grounds, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                    texturesUtil.Device.Draw(grounds, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
             foreach (var tile in Tiles)
@@ -49,7 +45,7 @@ namespace _2DFirstGame.Tiles
                 Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Wall"))
                 {
-                    device.Draw(walls, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                    texturesUtil.Device.Draw(walls, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
         }
