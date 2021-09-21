@@ -25,6 +25,10 @@ namespace _2DFirstGame.Utils
         {
             return grounds[(int)groundType];
         }
+        public Rectangle GetSource(Inside_Walls wallType)
+        {
+            return grounds[(int)wallType];
+        }
 
 
         private List<Rectangle> GetWallSource()

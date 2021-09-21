@@ -131,7 +131,17 @@ namespace _2DFirstGame.Tiles
                             DrawGround(x, y);
                             break;
                         case '1':
-                            
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
+                            break;
+                        case '2':
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Right)));
+                            break;
+                        case '3':
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Up)));
+                            break;
+                        case '4':
+                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
+                            break;
                         default:
                             continue;
                     }
