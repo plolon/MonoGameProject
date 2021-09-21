@@ -1,4 +1,5 @@
 ﻿using _2DFirstGame.DrawingHandler;
+using _2DFirstGame.DrawingHandler.String.Utils;
 using _2DFirstGame.Tiles;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
@@ -29,6 +30,7 @@ namespace _2DFirstGame
 
         protected override void Initialize()
         {
+            Logger.Info("Game changed panel", null);
             _frameCounter = new FPS_Handler();
             base.Initialize();
         }
@@ -66,6 +68,14 @@ namespace _2DFirstGame
             if (Utils.Keyboard.IsPressed(Keys.Left) || Utils.Keyboard.IsPressed(Keys.A))
             {
                 level0.Update(Direction.Right);
+            }
+
+            if(Utils.Keyboard.GetState().GetPressedKeys() != null)
+            {
+                foreach(var key in Utils.Keyboard.GetState().GetPressedKeys())
+                {
+                    Logger.Info($"Pressed: {key.ToString()}", System.ConsoleColor.Red);
+                }
             }
             base.Update(gameTime);
         }
