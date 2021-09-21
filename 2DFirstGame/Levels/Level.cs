@@ -30,22 +30,9 @@ namespace _2DFirstGame.Tiles
 
         public void Draw()
         {
-            foreach (var tile in Tiles)
-            {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
-                if (tile.GetType().Name.Equals("Ground"))
-                {
-                    texturesUtil.Device.Draw(texturesUtil.GroundsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
-                }
-            }
-            foreach (var tile in Tiles)
-            {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
-                if (tile.GetType().Name.Equals("Wall"))
-                {
-                    texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
-                }
-            }
+            DrawGround();
+            DrawWalls();
+            DrawInside_Walls();
         }
         public void Update(Direction direction)
         {
@@ -93,36 +80,36 @@ namespace _2DFirstGame.Tiles
                     switch (ch)
                     {
                         case 'L':
-                            DrawGround(x + modifier, y);
+                            AddGroundTile(x + modifier, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left)));
                             break;
                         case 'R':
-                            DrawGround(x - modifier, y);
+                            AddGroundTile(x - modifier, y);
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right)));
                             break;
                         case 'U':
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Up)));
                             break;
                         case 'D':
-                            DrawGround(x, y - modifier);
+                            AddGroundTile(x, y - modifier);
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Down)));
                             break;
                         case 'j':
-                            DrawGround(x - modifier, y - modifier);
+                            AddGroundTile(x - modifier, y - modifier);
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Down)));
                             break;
                         case 'q':
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Up)));
                             break;
                         case 'l':
-                            DrawGround(x + modifier, y - modifier);
+                            AddGroundTile(x + modifier, y - modifier);
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Down)));
                             break;
                         case 'p':
                             Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Up)));
                             break;
                         case '_':
-                            DrawGround(x, y);
+                            AddGroundTile(x, y);
                             break;
                         case '1':
                             Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
@@ -143,9 +130,43 @@ namespace _2DFirstGame.Tiles
                 }
             }
         }
-        private void DrawGround(int x, int y)
+        private void AddGroundTile(int x, int y)
         {
             Tiles.Add(new Ground(new Rectangle(x, y, width, height), texturesUtil.GetSource(Grounds.Clear), true));
+        }
+
+        private void DrawGround()
+        {
+            foreach (var tile in Tiles)
+            {
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
+                if (tile.GetType().Name.Equals("Ground"))
+                {
+                    texturesUtil.Device.Draw(texturesUtil.GroundsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                }
+            }
+        }
+        private void DrawWalls()
+        {
+            foreach (var tile in Tiles)
+            {
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
+                if (tile.GetType().Name.Equals("Wall"))
+                {
+                    texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                }
+            }
+        }
+        private void DrawInside_Walls()
+        {
+            foreach (var tile in Tiles)
+            {
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
+                if (tile.GetType().Name.Equals("Wall_Inside"))
+                {
+                    texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                }
+            }
         }
     }
 }
