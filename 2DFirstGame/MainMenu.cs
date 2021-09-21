@@ -20,9 +20,7 @@ namespace _2DFirstGame
         private float loadGameScale = 0.5f;
         private float optionsScale = 0.5f;
 
-        private int test;
-
-        private bool isPressed = false;
+        private AnimationString title;
 
         public MainMenu()
         {
@@ -45,6 +43,7 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
             background = new Background(Content.Load<Texture2D>(@"Textures\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+            title = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(50, 20), "game title");
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,9 +72,10 @@ namespace _2DFirstGame
 
             _spriteBatch.Begin();
             background.Draw(_spriteBatch);
-            _drawingHelper.DrawString(new Vector2(100, 100), "new game", newGameScale);
-            _drawingHelper.DrawString(new Vector2(100, 200), "load", loadGameScale);
-            _drawingHelper.DrawString(new Vector2(100, 300), "options", optionsScale);
+            title.Draw();
+            _drawingHelper.DrawString(new Vector2(100, 150), "new game", newGameScale);
+            _drawingHelper.DrawString(new Vector2(100, 250), "load", loadGameScale);
+            _drawingHelper.DrawString(new Vector2(100, 350), "options", optionsScale);
             _spriteBatch.End();
         }
 
