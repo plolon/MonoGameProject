@@ -33,6 +33,7 @@ namespace _2DFirstGame
 
         protected override void Initialize()
         {
+            Logger.Info("Game runned", null);
             base.Initialize();
         }
 
