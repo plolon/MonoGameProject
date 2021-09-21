@@ -1,5 +1,6 @@
 ﻿using _2DFirstGame.DrawingHandler;
 using _2DFirstGame.DrawingHandler.String.Utils;
+using _2DFirstGame.Sounds;
 using _2DFirstGame.Tiles;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
@@ -49,7 +50,7 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"Textures\floor"),
                 Content.Load<Texture2D>(@"Textures\inside_walls"));
             level0 = new Level(texturesUtil, @"levels\level0.txt");
-
+            SongPlayer.PlayBackgroundSong(Content.Load<Song>(@"Sounds\background"));
         }
 
         protected override void Update(GameTime gameTime)
