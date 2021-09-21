@@ -46,7 +46,7 @@ namespace _2DFirstGame.Utils
         private List<Rectangle> GetWallSource()
         {
             List<Rectangle> result = new List<Rectangle>();
-            for(int i=0; i<512; i += 64)
+            for(int i=0; i<512; i += 65)
             {
                 result.Add(new Rectangle(i, 0, 64, 64));
             }
