@@ -130,6 +130,8 @@ namespace _2DFirstGame.Tiles
                         case '_':
                             DrawGround(x, y);
                             break;
+                        case '1':
+                            
                         default:
                             continue;
                     }
