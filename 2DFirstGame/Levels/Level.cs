@@ -17,11 +17,16 @@ namespace _2DFirstGame.Tiles
         private int CurrentX;   // TODO moving tiles with adding current X to drowing
         private int CurrentY;
 
-        private const float scale = 2f;
+        private const float scale = 4f;
         private const int width = (int)(64 * scale);
         private const int height = (int)(64 * scale);
+<<<<<<< HEAD
         private const int modifier = (int)(16 * scale);
         public Level(TexturesUtil textureUtil, string path)
+=======
+        private int modifier = (int)Math.Ceiling((decimal)(16 * scale));
+        public Level(SpriteBatch device, string path, Texture2D walls, Texture2D grounds)
+>>>>>>> 98ee0c5 (Fixed texture 1 pixel lines)
         {
             Tiles = new List<Tile>();
             texturesUtil = textureUtil;
