@@ -76,8 +76,8 @@ namespace _2DFirstGame.Utils
     }
     public enum Inside_Walls
     {
-        Left,
         Right,
+        Left,
         Up,
         Down,
     }

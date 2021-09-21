@@ -45,9 +45,9 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
             gameOverString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
             texturesUtil = new TexturesUtil(_spriteBatch,
-                Content.Load<Texture2D>(""),
-                Content.Load<Texture2D>(""),
-                Content.Load<Texture2D>(""));
+                Content.Load<Texture2D>(@"Textures\walls"),
+                Content.Load<Texture2D>(@"Textures\floor"),
+                Content.Load<Texture2D>(@"Textures\inside_walls"));
             level0 = new Level(texturesUtil, @"levels\level0.txt");
             
         }

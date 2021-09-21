@@ -164,7 +164,7 @@ namespace _2DFirstGame.Tiles
                 Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Wall_Inside"))
                 {
-                    texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                    texturesUtil.Device.Draw(texturesUtil.Inside_wallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
         }
