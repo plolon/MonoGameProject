@@ -11,8 +11,6 @@ namespace _2DFirstGame.Tiles
     public class Level : ILevel
     {
         public List<Tile> Tiles { get; set; }
-        private Texture2D walls;
-        private Texture2D grounds;
 
         private TexturesUtil texturesUtil;
 
@@ -37,7 +35,7 @@ namespace _2DFirstGame.Tiles
                 Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Ground"))
                 {
-                    texturesUtil.Device.Draw(grounds, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                    texturesUtil.Device.Draw(texturesUtil.GroundsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
             foreach (var tile in Tiles)
@@ -45,7 +43,7 @@ namespace _2DFirstGame.Tiles
                 Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Wall"))
                 {
-                    texturesUtil.Device.Draw(walls, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                    texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
         }
