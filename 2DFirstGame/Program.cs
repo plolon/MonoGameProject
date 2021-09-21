@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2DFirstGame.Utils;
+using System;
 
 namespace _2DFirstGame
 {
@@ -7,6 +8,10 @@ namespace _2DFirstGame
         [STAThread]
         static void Main()
         {
+            Config.Width = 800;
+            Config.Height = 480;
+
+
             using (var game = new MainMenu())
                 game.Run();
 
