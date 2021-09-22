@@ -38,9 +38,12 @@ namespace _2DFirstGame.Utils
         private List<Rectangle> GetWallSource()
         {
             List<Rectangle> result = new List<Rectangle>();
-            for(int i=0; i<194; i += 65)
+            for(int y=0; y<258; y += 65)
             {
-                result.Add(new Rectangle(i, 0, 64, 64));
+                for(int x=0; x<259; x += 65)
+                {
+                    result.Add(new Rectangle(x,y,64,64));
+                }
             }
             return result;
         }
@@ -63,15 +66,21 @@ namespace _2DFirstGame.Utils
     }
     public enum Grounds
     {
+        Sand_Down,
+        Sand_Right,
+        Sand_Left,
+        Sand_Up,
+        Sand_Corner_RU,
+        Sand_Corner_RD,
+        Sand_Corner_LU,
+        Sand_Corner_LD,
+        Sand_Corner_RU2,
+        Sand_Corner_RD2,
+        Sand_Corner_LU2,
+        Sand_Corner_LD2,
         Flat_1,
         Flat_2,
-        Up_corner_righttup,
-        Up_corner_rightdown,
-        Up_corner_leftup,
-        Up_corner_lefttdown,
-        Up_down,
-        Up_right,
-        Up_left,
-        Up_up,
+        Flat_3,
+        Flat_4,
     }
 }
