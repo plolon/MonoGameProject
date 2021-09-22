@@ -79,63 +79,11 @@ namespace _2DFirstGame.Tiles
                 {
                     switch (ch)
                     {
-                        case 'L':
-                            AddGroundTile(x + modifier, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left)));
-                            break;
-                        case 'R':
-                            AddGroundTile(x - modifier, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right)));
-                            break;
-                        case 'U':
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Up)));
-                            break;
-                        case 'D':
-                            AddGroundTile(x, y - modifier);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Down)));
-                            break;
-                        case 'j':
-                            AddGroundTile(x - modifier, y - modifier);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Down)));
-                            break;
-                        case 'q':
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Up)));
-                            break;
-                        case 'l':
-                            AddGroundTile(x + modifier, y - modifier);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Down)));
-                            break;
-                        case 'p':
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Up)));
-                            break;
-                        case '_':
-                            AddGroundTile(x, y);
-                            break;
-                        case '1':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Right)));
-                            break;
-                        case '2':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
-                            break;
-                        case '3':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Down)));
-                            break;
-                        case '4':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Up)));
-                            break;
-                        case '5':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Solid)));
-                            break;
-                        default:
-                            continue;
+
                     }
                     x += width;
                 }
             }
-        }
-        private void AddGroundTile(int x, int y)
-        {
-            Tiles.Add(new Ground(new Rectangle(x, y, width, height), texturesUtil.GetSource(Grounds.Clear), true));
         }
 
         private void DrawGround()

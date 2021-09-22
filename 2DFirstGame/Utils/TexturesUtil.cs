@@ -25,7 +25,6 @@ namespace _2DFirstGame.Utils
             Inside_wallsT = inside_wallsT;
 
             walls = GetWallSource();
-            inside_walls = GetInside_WallSource();
             grounds = new List<Rectangle>() { new Rectangle(0, 0, 64, 64) };
         }
 
@@ -37,25 +36,12 @@ namespace _2DFirstGame.Utils
         {
             return grounds[(int)groundType];
         }
-        public Rectangle GetSource(Inside_Walls wallType)
-        {
-            return inside_walls[(int)wallType];
-        }
 
 
         private List<Rectangle> GetWallSource()
         {
             List<Rectangle> result = new List<Rectangle>();
             for(int i=0; i<512; i += 65)
-            {
-                result.Add(new Rectangle(i, 0, 64, 64));
-            }
-            return result;
-        }
-        private List<Rectangle> GetInside_WallSource()
-        {
-            List<Rectangle> result = new List<Rectangle>();
-            for(int i=0; i<323; i += 64)
             {
                 result.Add(new Rectangle(i, 0, 64, 64));
             }
@@ -73,14 +59,6 @@ namespace _2DFirstGame.Utils
         Left_Down,
         Right_Up,
         Right_Down
-    }
-    public enum Inside_Walls
-    {
-        Right,
-        Left,
-        Down,
-        Up,
-        Solid,
     }
     public enum Grounds
     {
