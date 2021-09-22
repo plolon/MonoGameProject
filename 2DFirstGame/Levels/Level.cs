@@ -21,6 +21,7 @@ namespace _2DFirstGame.Tiles
         private const int width = (int)(64 * scale);
         private const int height = (int)(64 * scale);
         private const int modifier = (int)(16 * scale);
+        Random random = new Random();
         public Level(TexturesUtil textureUtil, string path)
         {
             Tiles = new List<Tile>();
@@ -32,7 +33,6 @@ namespace _2DFirstGame.Tiles
         {
             DrawGround();
             DrawWalls();
-            DrawInside_Walls();
         }
         public void Update(Direction direction)
         {
@@ -72,6 +72,7 @@ namespace _2DFirstGame.Tiles
 
         private void HandleRow(string row, int y)
         {
+            Rectangle meta;
             int x = 0;
             foreach (var ch in row)
             {
@@ -79,7 +80,40 @@ namespace _2DFirstGame.Tiles
                 {
                     switch (ch)
                     {
-
+                        case '_':
+                            meta = GetRandomMeta(new List<Rectangle>(){ texturesUtil.GetSource(Grounds.Flat_1),texturesUtil.GetSource(Grounds.Flat_2)});
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
+                            break;
+                        case 'l':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_righttup), true));
+                            break;
+                        case 'p':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_rightdown), true));
+                            break;
+                        case 'j':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_leftup), true));
+                            break;
+                        case 'q':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_lefttdown), true));
+                            break;
+                        case 'u':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_down), true));
+                            break;
+                        case 'L':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_left), true));
+                            break;
+                        case 'r':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_right), true));
+                            break;
+                        case 'w':
+                            meta = GetRandomMeta(new List<Rectangle>() { texturesUtil.GetSource(Walls.Wall_1), texturesUtil.GetSource(Walls.Wall_2) });
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
+                            break;
+                        case 'W':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Wall_up), true));
+                            break;
+                        default:
+                            continue;
                     }
                     x += width;
                 }
@@ -108,16 +142,11 @@ namespace _2DFirstGame.Tiles
                 }
             }
         }
-        private void DrawInside_Walls()
+
+        private Rectangle GetRandomMeta(List<Rectangle> from)
         {
-            foreach (var tile in Tiles)
-            {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
-                if (tile.GetType().Name.Equals("Wall_Inside"))
-                {
-                    texturesUtil.Device.Draw(texturesUtil.Inside_wallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
-                }
-            }
+            int rand = random.Next(0, from.Count);
+            return from[rand];
         }
     }
 }

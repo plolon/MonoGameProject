@@ -44,7 +44,7 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
-            background = new Background(Content.Load<Texture2D>(@"Textures\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+            background = new Background(Content.Load<Texture2D>(@"Textures\old\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
         }
 
         protected override void Update(GameTime gameTime)
