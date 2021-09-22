@@ -167,6 +167,10 @@ namespace _2DFirstGame.Tiles
         private Rectangle GetRandomMeta(List<Rectangle> from)
         {
             int rand = random.Next(0, from.Count);
+            if(rand == 3)
+            {
+                rand = random.Next(0, from.Count);
+            }
             return from[rand];
         }
     }
