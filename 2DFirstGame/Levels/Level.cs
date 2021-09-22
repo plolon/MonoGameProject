@@ -97,6 +97,9 @@ namespace _2DFirstGame.Tiles
                             Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_lefttdown), true));
                             break;
                         case 'u':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_up), true));
+                            break;
+                        case 'd':
                             Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_down), true));
                             break;
                         case 'L':
@@ -107,10 +110,12 @@ namespace _2DFirstGame.Tiles
                             break;
                         case 'w':
                             meta = GetRandomMeta(new List<Rectangle>() { texturesUtil.GetSource(Walls.Wall_1), texturesUtil.GetSource(Walls.Wall_2) });
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), meta));
                             break;
                         case 'W':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Wall_up), true));
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Wall_up)));
+                            break;
+                        case '0':
                             break;
                         default:
                             continue;
