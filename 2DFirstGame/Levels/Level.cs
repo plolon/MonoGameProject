@@ -81,32 +81,48 @@ namespace _2DFirstGame.Tiles
                     switch (ch)
                     {
                         case '_':
-                            meta = GetRandomMeta(new List<Rectangle>(){ texturesUtil.GetSource(Grounds.Flat_1),texturesUtil.GetSource(Grounds.Flat_2)});
+                            meta = GetRandomMeta(new List<Rectangle>()
+                            {   texturesUtil.GetSource(Grounds.Flat_1),
+                                texturesUtil.GetSource(Grounds.Flat_2),
+                                texturesUtil.GetSource(Grounds.Flat_3),
+                                texturesUtil.GetSource(Grounds.Flat_4),});
                             Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
                             break;
-                        case 'l':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_righttup), true));
+                        case 'D':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Down), true));
                             break;
-                        case 'p':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_rightdown), true));
-                            break;
-                        case 'j':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_leftup), true));
-                            break;
-                        case 'q':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_corner_lefttdown), true));
-                            break;
-                        case 'u':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_up), true));
-                            break;
-                        case 'd':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_down), true));
+                        case 'R':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Right), true));
                             break;
                         case 'L':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_left), true));
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Left), true));
                             break;
-                        case 'r':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Up_right), true));
+                        case 'U':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Up), true));
+                            break;
+                        case 'q':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU), true));
+                            break;
+                        case 'j':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD), true));
+                            break;
+                        case 'p':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU), true));
+                            break;
+                        case 'k':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD), true));
+                            break;
+                        case 'Q':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU2), true));
+                            break;
+                        case 'J':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD2), true));
+                            break;
+                        case 'P':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU2), true));
+                            break;
+                        case 'l':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD2), true));
                             break;
                         case 'w':
                             meta = GetRandomMeta(new List<Rectangle>() { texturesUtil.GetSource(Walls.Wall_1), texturesUtil.GetSource(Walls.Wall_2) });
