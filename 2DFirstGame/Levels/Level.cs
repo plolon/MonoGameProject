@@ -26,6 +26,7 @@ namespace _2DFirstGame.Tiles
         private int maxX;
         private int maxY;
 
+        Random random = new Random();
         public Level(TexturesUtil textureUtil, string path)
         {
             Tiles = new List<Tile>();
@@ -46,7 +47,6 @@ namespace _2DFirstGame.Tiles
             Logger.Info($"{CurrentX} {CurrentY}", ConsoleColor.Green);
             DrawGround();
             DrawWalls();
-            DrawInside_Walls();
         }
         public void Update(Direction direction)
         {
@@ -94,6 +94,7 @@ namespace _2DFirstGame.Tiles
 
         private void HandleRow(string row, int y)
         {
+            Rectangle meta;
             int x = 0;
             foreach (var ch in row)
             {
@@ -101,52 +102,58 @@ namespace _2DFirstGame.Tiles
                 {
                     switch (ch)
                     {
-                        case 'L':
-                            AddGroundTile(x + modifier, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left)));
-                            break;
-                        case 'R':
-                            AddGroundTile(x - modifier, y);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right)));
-                            break;
-                        case 'U':
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Up)));
+                        case '_':
+                            meta = GetRandomMeta(new List<Rectangle>()
+                            {   texturesUtil.GetSource(Grounds.Flat_1),
+                                texturesUtil.GetSource(Grounds.Flat_2),
+                                texturesUtil.GetSource(Grounds.Flat_3),
+                                texturesUtil.GetSource(Grounds.Flat_4),});
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
                             break;
                         case 'D':
-                            AddGroundTile(x, y - modifier);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Down)));
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Down), true));
                             break;
-                        case 'j':
-                            AddGroundTile(x - modifier, y - modifier);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Down)));
+                        case 'R':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Right), true));
+                            break;
+                        case 'L':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Left), true));
+                            break;
+                        case 'U':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Up), true));
                             break;
                         case 'q':
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Right_Up)));
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU), true));
                             break;
-                        case 'l':
-                            AddGroundTile(x + modifier, y - modifier);
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Down)));
+                        case 'j':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD), true));
                             break;
                         case 'p':
-                            Tiles.Add(new Wall(new Rectangle(x, y, width, height), texturesUtil.GetSource(Walls.Left_Up)));
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU), true));
                             break;
-                        case '_':
-                            AddGroundTile(x, y);
+                        case 'k':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD), true));
                             break;
-                        case '1':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Right)));
+                        case 'Q':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU2), true));
                             break;
-                        case '2':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Left)));
+                        case 'J':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD2), true));
                             break;
-                        case '3':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Down)));
+                        case 'P':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU2), true));
                             break;
-                        case '4':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Up)));
+                        case 'l':
+                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD2), true));
                             break;
-                        case '5':
-                            Tiles.Add(new Wall_Inside(new Rectangle(x, y, width, height), texturesUtil.GetSource(Inside_Walls.Solid)));
+                        case 'w':
+                            meta = GetRandomMeta(new List<Rectangle>() { texturesUtil.GetSource(Walls.Wall_1), texturesUtil.GetSource(Walls.Wall_2) });
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), meta));
+                            break;
+                        case 'W':
+                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Wall_up)));
+                            break;
+                        case '0':
                             break;
                         default:
                             continue;
@@ -154,10 +161,6 @@ namespace _2DFirstGame.Tiles
                     x += width;
                 }
             }
-        }
-        private void AddGroundTile(int x, int y)
-        {
-            Tiles.Add(new Ground(new Rectangle(x, y, width, height), texturesUtil.GetSource(Grounds.Clear), true));
         }
 
         private void DrawGround()
@@ -182,16 +185,15 @@ namespace _2DFirstGame.Tiles
                 }
             }
         }
-        private void DrawInside_Walls()
+
+        private Rectangle GetRandomMeta(List<Rectangle> from)
         {
-            foreach (var tile in Tiles)
+            int rand = random.Next(0, from.Count);
+            if(rand == 3)
             {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
-                if (tile.GetType().Name.Equals("Wall_Inside"))
-                {
-                    texturesUtil.Device.Draw(texturesUtil.Inside_wallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
-                }
+                rand = random.Next(0, from.Count);
             }
+            return from[rand];
         }
     }
 }

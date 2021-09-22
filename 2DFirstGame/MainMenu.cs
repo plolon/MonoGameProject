@@ -42,8 +42,12 @@ namespace _2DFirstGame
                 Content.Load<Texture2D>(@"StringDrawing\Numbers"),
                 Content.Load<Texture2D>(@"StringDrawing\Characters"),
                 Content.Load<Texture2D>(@"StringDrawing\Specials"));
+<<<<<<< HEAD
             background = new Background(Content.Load<Texture2D>(@"Textures\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
             title = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(50, 20), "game title");
+=======
+            background = new Background(Content.Load<Texture2D>(@"Textures\old\brick"), _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+>>>>>>> new_textures
         }
 
         protected override void Update(GameTime gameTime)
