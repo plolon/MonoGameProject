@@ -1,17 +1,17 @@
 ﻿using _2DFirstGame.DrawingHandler.String.Utils;
+using _2DFirstGame.Levels;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace _2DFirstGame.Tiles
 {
     public class Level : ILevel
     {
         public List<Tile> Tiles { get; set; }
+        public List<Decoration> Decorations { get; set; }
 
         private TexturesUtil texturesUtil;
 
@@ -21,17 +21,17 @@ namespace _2DFirstGame.Tiles
         private const float scale = 1f;
         private const int width = (int)(64 * scale);
         private const int height = (int)(64 * scale);
-        private const int modifier = (int)(16 * scale);
 
         private int maxX;
         private int maxY;
 
         Random random = new Random();
-        public Level(TexturesUtil textureUtil, string path)
+        public Level(TexturesUtil textureUtil, string level)
         {
             Tiles = new List<Tile>();
+            Decorations = new List<Decoration>();
             texturesUtil = textureUtil;
-            ReadLevelFile(path);
+            ReadLevelFile(level);
             GetMaxValues();
         }
 
@@ -46,6 +46,7 @@ namespace _2DFirstGame.Tiles
         {
             Logger.Info($"{CurrentX} {CurrentY}", ConsoleColor.Green);
             DrawGround();
+            DrawDecorations();
             DrawWalls();
         }
         public void Update(Direction direction)
@@ -77,88 +78,44 @@ namespace _2DFirstGame.Tiles
 
         public void ReadLevelFile(string path)
         {
-            string input;
-            using (StreamReader file = new StreamReader(path))
-            {
-                input = file.ReadToEnd();
-                file.Close();
-            }
-            var rows = input.Split(',').ToList();
+
+            var levelRows = LevelUtil.GetLevelBasics(path);
+            var tiles = LevelUtil.GetLevelInfo(levelRows[0]);
+            var decorations = LevelUtil.GetLevelInfo(levelRows[1]);
+
             int y = 0;
-            foreach (var row in rows)
+            foreach (var row in decorations)
             {
-                HandleRow(row, y);
+                HandleDecoration(row);
+            }
+            foreach (var row in tiles)
+            {
+                HandleLevelRow(row, y);
                 y += height;
             }
         }
 
-        private void HandleRow(string row, int y)
+        private void HandleDecoration(string row)
         {
-            Rectangle meta;
+            if (!String.IsNullOrEmpty(row))
+            {
+                Decorations.Add(DecorationHelper.SwitchRow(texturesUtil, row));
+            }
+        }
+
+        private void HandleLevelRow(string row, int y)
+        {
             int x = 0;
             foreach (var ch in row)
             {
                 if (!String.IsNullOrEmpty(ch.ToString()))
                 {
-                    switch (ch)
+                    Tile buffer = TileHelper.SwitchLetter(texturesUtil, ch, x, y);
+                    if (buffer != null)
                     {
-                        case '_':
-                            meta = GetRandomMeta(new List<Rectangle>()
-                            {   texturesUtil.GetSource(Grounds.Flat_1),
-                                texturesUtil.GetSource(Grounds.Flat_2),
-                                texturesUtil.GetSource(Grounds.Flat_3),
-                                texturesUtil.GetSource(Grounds.Flat_4),});
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
-                            break;
-                        case 'D':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Down), true));
-                            break;
-                        case 'R':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Right), true));
-                            break;
-                        case 'L':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Left), true));
-                            break;
-                        case 'U':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Up), true));
-                            break;
-                        case 'q':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU), true));
-                            break;
-                        case 'j':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD), true));
-                            break;
-                        case 'p':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU), true));
-                            break;
-                        case 'k':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD), true));
-                            break;
-                        case 'Q':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU2), true));
-                            break;
-                        case 'J':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD2), true));
-                            break;
-                        case 'P':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU2), true));
-                            break;
-                        case 'l':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD2), true));
-                            break;
-                        case 'w':
-                            meta = GetRandomMeta(new List<Rectangle>() { texturesUtil.GetSource(Walls.Wall_1), texturesUtil.GetSource(Walls.Wall_2) });
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), meta));
-                            break;
-                        case 'W':
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Wall_up)));
-                            break;
-                        case '0':
-                            break;
-                        default:
-                            continue;
+                        Tiles.Add(buffer);
+                        x += width;
                     }
-                    x += width;
                 }
             }
         }
@@ -167,9 +124,9 @@ namespace _2DFirstGame.Tiles
         {
             foreach (var tile in Tiles)
             {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Ground"))
                 {
+                    Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                     texturesUtil.Device.Draw(texturesUtil.GroundsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
@@ -178,22 +135,22 @@ namespace _2DFirstGame.Tiles
         {
             foreach (var tile in Tiles)
             {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Wall"))
                 {
+                    Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                     texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
         }
-
-        private Rectangle GetRandomMeta(List<Rectangle> from)
+        private void DrawDecorations()
         {
-            int rand = random.Next(0, from.Count);
-            if(rand == 3)
+            foreach (var tile in Decorations)
             {
-                rand = random.Next(0, from.Count);
+
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
+                texturesUtil.Device.Draw(texturesUtil.DecorationsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+
             }
-            return from[rand];
         }
     }
 }

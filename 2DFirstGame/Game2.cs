@@ -47,7 +47,8 @@ namespace _2DFirstGame
             gameOverString = new AnimationString(_spriteBatch, _drawingHelper, new Vector2(75, 175), "GAME OVER");
             texturesUtil = new TexturesUtil(_spriteBatch,
                 Content.Load<Texture2D>(@"Textures\walls"),
-                Content.Load<Texture2D>(@"Textures\grounds"));
+                Content.Load<Texture2D>(@"Textures\grounds"),
+                Content.Load<Texture2D>(@"Textures\decorations"));
             level0 = new Level(texturesUtil, @"levels\level0.txt");
             SongPlayer.PlayBackgroundSong(Content.Load<Song>(@"Sounds\background"));
         }
