@@ -23,9 +23,11 @@ namespace _2DFirstGame.Utils
 
             WallsT = wallsT;
             GroundsT = groundsT;
+            DecorationsT = decorationsT;
 
             walls = GetWallSource();
             grounds = GetGroundSource();
+            decorations = GetDecorationSource();
         }
 
         public Rectangle GetSource(Walls wallType)
@@ -61,6 +63,15 @@ namespace _2DFirstGame.Utils
             for (int i = 0; i < 194; i += 65)
             {
                 result.Add(new Rectangle(i, 0, 64, 64));
+            }
+            return result;
+        }
+        private List<Rectangle> GetDecorationSource()
+        {
+            List<Rectangle> result = new List<Rectangle>();
+            for (int i = 0; i < 70; i += 71)
+            {
+                result.Add(new Rectangle(i, 0, 70, 70));
             }
             return result;
         }
