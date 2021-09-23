@@ -46,8 +46,8 @@ namespace _2DFirstGame.Tiles
         {
             Logger.Info($"{CurrentX} {CurrentY}", ConsoleColor.Green);
             DrawGround();
+            DrawDecorations();
             DrawWalls();
-            //DrawDecorations();
         }
         public void Update(Direction direction)
         {
@@ -97,7 +97,7 @@ namespace _2DFirstGame.Tiles
 
         private void HandleDecoration(string row)
         {
-            if (!String.IsNullOrEmpty(row.ToString()))
+            if (!String.IsNullOrEmpty(row))
             {
                 Decorations.Add(DecorationHelper.SwitchRow(texturesUtil, row));
             }
