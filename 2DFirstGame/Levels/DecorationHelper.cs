@@ -8,15 +8,19 @@ namespace _2DFirstGame.Levels
 {
     public static class DecorationHelper
     {
-        public static Tile SwitchRow(TexturesUtil texturesUtil, string row)
+        public static Decoration SwitchRow(TexturesUtil texturesUtil, string row)
         {
             if (row.StartsWith('c'))
             {
                 return CreateCrate(texturesUtil, row);
             }
-            else return null;
+            else 
+            {
+                Logger.Info("ELO", null);
+                return null; 
+            }
         }
-        private static Tile CreateCrate(TexturesUtil texturesUtil, string row)
+        private static Decoration CreateCrate(TexturesUtil texturesUtil, string row)
         {
             var param = row.Split('.');
             int x = int.Parse(param[1]);

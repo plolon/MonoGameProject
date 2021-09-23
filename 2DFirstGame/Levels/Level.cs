@@ -11,6 +11,7 @@ namespace _2DFirstGame.Tiles
     public class Level : ILevel
     {
         public List<Tile> Tiles { get; set; }
+        public List<Decoration> Decorations { get; set; }
 
         private TexturesUtil texturesUtil;
 
@@ -28,6 +29,7 @@ namespace _2DFirstGame.Tiles
         public Level(TexturesUtil textureUtil, string level)
         {
             Tiles = new List<Tile>();
+            Decorations = new List<Decoration>();
             texturesUtil = textureUtil;
             ReadLevelFile(level);
             GetMaxValues();
@@ -45,7 +47,7 @@ namespace _2DFirstGame.Tiles
             Logger.Info($"{CurrentX} {CurrentY}", ConsoleColor.Green);
             DrawGround();
             DrawWalls();
-            DrawDecorations();
+            //DrawDecorations();
         }
         public void Update(Direction direction)
         {
@@ -76,7 +78,7 @@ namespace _2DFirstGame.Tiles
 
         public void ReadLevelFile(string path)
         {
-            
+
             var levelRows = LevelUtil.GetLevelBasics(path);
             var tiles = LevelUtil.GetLevelInfo(levelRows[0]);
             var decorations = LevelUtil.GetLevelInfo(levelRows[1]);
@@ -95,7 +97,10 @@ namespace _2DFirstGame.Tiles
 
         private void HandleDecoration(string row)
         {
-            Tiles.Add(DecorationHelper.SwitchRow(texturesUtil, row));
+            if (!String.IsNullOrEmpty(row.ToString()))
+            {
+                Decorations.Add(DecorationHelper.SwitchRow(texturesUtil, row));
+            }
         }
 
         private void HandleLevelRow(string row, int y)
@@ -139,13 +144,12 @@ namespace _2DFirstGame.Tiles
         }
         private void DrawDecorations()
         {
-            foreach (var tile in Tiles)
+            foreach (var tile in Decorations)
             {
+
                 Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
-                if (tile.GetType().Name.Equals("Decorations"))
-                {
-                    texturesUtil.Device.Draw(texturesUtil.DecorationsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
-                }
+                texturesUtil.Device.Draw(texturesUtil.DecorationsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+
             }
         }
     }
