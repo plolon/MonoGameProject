@@ -21,7 +21,6 @@ namespace _2DFirstGame.Tiles
         private const float scale = 1f;
         private const int width = (int)(64 * scale);
         private const int height = (int)(64 * scale);
-        private const int modifier = (int)(16 * scale);
 
         private int maxX;
         private int maxY;
