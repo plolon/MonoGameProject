@@ -83,12 +83,21 @@ namespace _2DFirstGame.Tiles
             int y = 0;
             foreach (var row in tiles)
             {
-                HandleRow(row, y);
+                HandleLevelRow(row, y);
                 y += height;
+            }
+            foreach (var row in decorations)
+            {
+                HandleDecoration(row);
             }
         }
 
-        private void HandleRow(string row, int y)
+        private void HandleDecoration(string row)
+        {
+            
+        }
+
+        private void HandleLevelRow(string row, int y)
         {
             int x = 0;
             foreach (var ch in row)

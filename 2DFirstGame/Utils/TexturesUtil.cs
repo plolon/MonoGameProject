@@ -9,13 +9,15 @@ namespace _2DFirstGame.Utils
     {
         private List<Rectangle> walls;
         private List<Rectangle> grounds;
+        private List<Rectangle> decorations;
 
         public SpriteBatch Device { get; set; }
 
         public Texture2D WallsT { get; set; }
         public Texture2D GroundsT { get; set; }
+        public Texture2D DecorationsT { get; set; }
 
-        public TexturesUtil(SpriteBatch device, Texture2D wallsT, Texture2D groundsT)
+        public TexturesUtil(SpriteBatch device, Texture2D wallsT, Texture2D groundsT, Texture2D decorationsT)
         {
             Device = device;
 
@@ -34,17 +36,21 @@ namespace _2DFirstGame.Utils
         {
             return grounds[(int)groundType];
         }
+        public Rectangle GetSource(Decorations decorationType)
+        {
+            return decorations[(int)decorationType];
+        }
 
 
         private List<Rectangle> GetGroundSource()
         {
             List<Rectangle> result = new List<Rectangle>();
-            for(int y=0; y<258; y += 65)
+            for (int y = 0; y < 258; y += 65)
             {
-                for(int x=0; x<259; x += 65)
+                for (int x = 0; x < 259; x += 65)
                 {
                     Logger.Info($"{x},{y}", null);
-                    result.Add(new Rectangle(x,y,64,64));
+                    result.Add(new Rectangle(x, y, 64, 64));
                 }
             }
             return result;
@@ -52,7 +58,7 @@ namespace _2DFirstGame.Utils
         private List<Rectangle> GetWallSource()
         {
             List<Rectangle> result = new List<Rectangle>();
-            for(int i=0; i<194; i += 65)
+            for (int i = 0; i < 194; i += 65)
             {
                 result.Add(new Rectangle(i, 0, 64, 64));
             }
