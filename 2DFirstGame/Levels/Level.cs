@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace _2DFirstGame.Tiles
 {
@@ -27,11 +25,11 @@ namespace _2DFirstGame.Tiles
         private int maxY;
 
         Random random = new Random();
-        public Level(TexturesUtil textureUtil, string path)
+        public Level(TexturesUtil textureUtil, string level)
         {
             Tiles = new List<Tile>();
             texturesUtil = textureUtil;
-            ReadLevelFile(path);
+            ReadLevelFile(level);
             GetMaxValues();
         }
 
@@ -77,15 +75,13 @@ namespace _2DFirstGame.Tiles
 
         public void ReadLevelFile(string path)
         {
-            string input;
-            using (StreamReader file = new StreamReader(path))
-            {
-                input = file.ReadToEnd();
-                file.Close();
-            }
-            var rows = input.Split(',').ToList();
+            
+            var levelRows = LevelUtil.GetLevelBasics(path);
+            var tiles = LevelUtil.GetLevelInfo(levelRows[0]);
+            var decorations = LevelUtil.GetLevelInfo(levelRows[1]);
+
             int y = 0;
-            foreach (var row in rows)
+            foreach (var row in tiles)
             {
                 HandleRow(row, y);
                 y += height;
@@ -100,7 +96,7 @@ namespace _2DFirstGame.Tiles
                 if (!String.IsNullOrEmpty(ch.ToString()))
                 {
                     Tile buffer = TileHelper.SwitchLetter(texturesUtil, ch, x, y);
-                    if(buffer != null)
+                    if (buffer != null)
                     {
                         Tiles.Add(buffer);
                         x += width;
