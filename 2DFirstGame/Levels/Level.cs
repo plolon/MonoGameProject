@@ -45,6 +45,7 @@ namespace _2DFirstGame.Tiles
             Logger.Info($"{CurrentX} {CurrentY}", ConsoleColor.Green);
             DrawGround();
             DrawWalls();
+            DrawDecorations();
         }
         public void Update(Direction direction)
         {
@@ -81,20 +82,20 @@ namespace _2DFirstGame.Tiles
             var decorations = LevelUtil.GetLevelInfo(levelRows[1]);
 
             int y = 0;
+            foreach (var row in decorations)
+            {
+                HandleDecoration(row);
+            }
             foreach (var row in tiles)
             {
                 HandleLevelRow(row, y);
                 y += height;
             }
-            foreach (var row in decorations)
-            {
-                HandleDecoration(row);
-            }
         }
 
         private void HandleDecoration(string row)
         {
-            
+            Tiles.Add(DecorationHelper.SwitchRow(texturesUtil, row));
         }
 
         private void HandleLevelRow(string row, int y)
@@ -118,9 +119,9 @@ namespace _2DFirstGame.Tiles
         {
             foreach (var tile in Tiles)
             {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Ground"))
                 {
+                    Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                     texturesUtil.Device.Draw(texturesUtil.GroundsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
@@ -129,10 +130,21 @@ namespace _2DFirstGame.Tiles
         {
             foreach (var tile in Tiles)
             {
-                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                 if (tile.GetType().Name.Equals("Wall"))
                 {
+                    Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
                     texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+                }
+            }
+        }
+        private void DrawDecorations()
+        {
+            foreach (var tile in Tiles)
+            {
+                Vector2 position = new Vector2(tile.Rectangle.X + CurrentX, tile.Rectangle.Y + CurrentY);
+                if (tile.GetType().Name.Equals("Decorations"))
+                {
+                    texturesUtil.Device.Draw(texturesUtil.DecorationsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
         }
