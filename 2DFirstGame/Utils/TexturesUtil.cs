@@ -85,4 +85,8 @@ namespace _2DFirstGame.Utils
         Flat_3,
         Flat_4,
     }
+    public enum Decorations
+    {
+        Crate,
+    }
 }

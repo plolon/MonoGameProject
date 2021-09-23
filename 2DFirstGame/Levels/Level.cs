@@ -1,4 +1,5 @@
 ﻿using _2DFirstGame.DrawingHandler.String.Utils;
+using _2DFirstGame.Levels;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -93,71 +94,17 @@ namespace _2DFirstGame.Tiles
 
         private void HandleRow(string row, int y)
         {
-            Rectangle meta;
             int x = 0;
             foreach (var ch in row)
             {
                 if (!String.IsNullOrEmpty(ch.ToString()))
                 {
-                    switch (ch)
+                    Tile buffer = TileHelper.SwitchLetter(texturesUtil, ch, x, y);
+                    if(buffer != null)
                     {
-                        case '_':
-                            meta = GetRandomMeta(new List<Rectangle>()
-                            {   texturesUtil.GetSource(Grounds.Flat_1),
-                                texturesUtil.GetSource(Grounds.Flat_2),
-                                texturesUtil.GetSource(Grounds.Flat_3),
-                                texturesUtil.GetSource(Grounds.Flat_4),});
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), meta, true));
-                            break;
-                        case 'D':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Down), true));
-                            break;
-                        case 'R':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Right), true));
-                            break;
-                        case 'L':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Left), true));
-                            break;
-                        case 'U':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Up), true));
-                            break;
-                        case 'q':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU), true));
-                            break;
-                        case 'j':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD), true));
-                            break;
-                        case 'p':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU), true));
-                            break;
-                        case 'k':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD), true));
-                            break;
-                        case 'Q':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RU2), true));
-                            break;
-                        case 'J':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_RD2), true));
-                            break;
-                        case 'P':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LU2), true));
-                            break;
-                        case 'l':
-                            Tiles.Add(new Ground(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Grounds.Sand_Corner_LD2), true));
-                            break;
-                        case 'w':
-                            meta = GetRandomMeta(new List<Rectangle>() { texturesUtil.GetSource(Walls.Wall_1), texturesUtil.GetSource(Walls.Wall_2) });
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), meta));
-                            break;
-                        case 'W':
-                            Tiles.Add(new Wall(new Rectangle(x, y, 64, 64), texturesUtil.GetSource(Walls.Wall_up)));
-                            break;
-                        case '0':
-                            break;
-                        default:
-                            continue;
+                        Tiles.Add(buffer);
+                        x += width;
                     }
-                    x += width;
                 }
             }
         }
@@ -183,16 +130,6 @@ namespace _2DFirstGame.Tiles
                     texturesUtil.Device.Draw(texturesUtil.WallsT, position, tile.Source, Color.White, 0f, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
                 }
             }
-        }
-
-        private Rectangle GetRandomMeta(List<Rectangle> from)
-        {
-            int rand = random.Next(0, from.Count);
-            if(rand == 3)
-            {
-                rand = random.Next(0, from.Count);
-            }
-            return from[rand];
         }
     }
 }
