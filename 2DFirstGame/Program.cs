@@ -12,10 +12,12 @@ namespace _2DFirstGame
             Config.Height = 480;
 
 
-            using (var game = new MainMenu())
-                game.Run();
+            //using (var game = new MainMenu())
+            //    game.Run();
 
-            using (var game = new Game2())
+            //using (var game = new Game2())
+            //    game.Run();
+            using (var game = new Game3())
                 game.Run();
             
         }
