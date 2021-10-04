@@ -22,6 +22,7 @@ namespace _2DFirstGame
         private bool isGameOver = false;
 
         private Level level0;
+        Player player;
 
         public Game2()
         {
@@ -35,7 +36,7 @@ namespace _2DFirstGame
             Logger.Info("Game changed panel", null);
             _frameCounter = new FPS_Handler();
             base.Initialize();
-            Player player = new Player(10);
+            player = new Player(7);
         }
 
         protected override void LoadContent()
@@ -94,6 +95,7 @@ namespace _2DFirstGame
             else
             {
                 level0.Draw();
+                HUD.DrawHUD(_spriteBatch, texturesUtil, player);
                _drawingHelper.DrawString(new Vector2(Config.Width-100, 10), getFPS(gameTime), 0.2f);
             }
             _spriteBatch.End();

@@ -46,6 +46,10 @@ namespace _2DFirstGame.Utils
         {
             return decorations[(int)decorationType];
         }
+        public Rectangle GetSource(Hud hudType)
+        {
+            return hud[(int)hudType];
+        }
 
 
         private List<Rectangle> GetGroundSource()
