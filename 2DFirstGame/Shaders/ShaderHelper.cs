@@ -21,9 +21,11 @@ namespace _2DFirstGame.Shaders
 
         private void LoadEffects(ContentManager content)
         {
-            Effect linearFade = content.Load<Effect>("LinearFade");
+            Effect linearFade = content.Load<Effect>(@"Shaders\LinearFade");
             linearFade.Parameters["Visibility"].SetValue(0.7f);
             effects.Add(linearFade);
+            Effect gaussianBlur = content.Load<Effect>(@"Shaders\GaussianBlur");
+            effects.Add(gaussianBlur);
         }
 
         public enum Effects

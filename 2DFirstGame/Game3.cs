@@ -4,6 +4,7 @@ using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace _2DFirstGame
 {
@@ -14,7 +15,7 @@ namespace _2DFirstGame
         private DrawingHelper _drawingHelper;
         Texture2D background;
 
-        ShaderHelper shaders; 
+        ShaderHelper shaders;
 
         public Game3()
         {
@@ -50,7 +51,9 @@ namespace _2DFirstGame
 
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            shaders.GetEffect(ShaderHelper.Effects.LinearFade).CurrentTechnique.Passes[0].Apply();
+            //shaders.GetEffect(ShaderHelper.Effects.LinearFade).CurrentTechnique.Passes[0].Apply();
+            shaders.GetEffect(ShaderHelper.Effects.Blur).CurrentTechnique.Passes[0].Apply();
+
             _spriteBatch.Draw(background, new Vector2(0, background.Height), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0f);
             _spriteBatch.End();
 

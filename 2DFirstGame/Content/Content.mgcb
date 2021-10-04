@@ -25,11 +25,17 @@
 /processorParam:TextureFormat=Color
 /build:background.png
 
-#begin LinearFade.fx
+#begin Shaders/GaussianBlur.fx
 /importer:EffectImporter
 /processor:EffectProcessor
 /processorParam:DebugMode=Auto
-/build:LinearFade.fx
+/build:Shaders/GaussianBlur.fx
+
+#begin Shaders/LinearFade.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/LinearFade.fx
 
 #begin Sounds/background.mp3
 /importer:Mp3Importer

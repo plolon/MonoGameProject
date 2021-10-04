@@ -19,7 +19,7 @@ namespace _2DFirstGame
             //    game.Run();
             using (var game = new Game3())
                 game.Run();
-            
+
         }
     }
 }
