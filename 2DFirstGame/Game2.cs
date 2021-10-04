@@ -49,7 +49,8 @@ namespace _2DFirstGame
             texturesUtil = new TexturesUtil(_spriteBatch,
                 Content.Load<Texture2D>(@"Textures\walls"),
                 Content.Load<Texture2D>(@"Textures\grounds"),
-                Content.Load<Texture2D>(@"Textures\decorations"));
+                Content.Load<Texture2D>(@"Textures\decorations"),
+                Content.Load<Texture2D>(@"Textures\hud"));
             level0 = new Level(texturesUtil, @"levels\level0.txt");
             SongPlayer.PlayBackgroundSong(Content.Load<Song>(@"Sounds\background"));
         }
