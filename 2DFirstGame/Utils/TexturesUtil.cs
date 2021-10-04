@@ -10,24 +10,28 @@ namespace _2DFirstGame.Utils
         private List<Rectangle> walls;
         private List<Rectangle> grounds;
         private List<Rectangle> decorations;
+        private List<Rectangle> hud;
 
         public SpriteBatch Device { get; set; }
 
         public Texture2D WallsT { get; set; }
         public Texture2D GroundsT { get; set; }
         public Texture2D DecorationsT { get; set; }
+        public Texture2D HudT { get; set; }
 
-        public TexturesUtil(SpriteBatch device, Texture2D wallsT, Texture2D groundsT, Texture2D decorationsT)
+        public TexturesUtil(SpriteBatch device, Texture2D wallsT, Texture2D groundsT, Texture2D decorationsT, Texture2D hudT)
         {
             Device = device;
 
             WallsT = wallsT;
             GroundsT = groundsT;
             DecorationsT = decorationsT;
+            HudT = hudT;
 
             walls = GetWallSource();
             grounds = GetGroundSource();
             decorations = GetDecorationSource();
+            hud = GetHudSource();
         }
 
         public Rectangle GetSource(Walls wallType)
@@ -41,6 +45,10 @@ namespace _2DFirstGame.Utils
         public Rectangle GetSource(Decorations decorationType)
         {
             return decorations[(int)decorationType];
+        }
+        public Rectangle GetSource(Hud hudType)
+        {
+            return hud[(int)hudType];
         }
 
 
@@ -75,6 +83,15 @@ namespace _2DFirstGame.Utils
             }
             return result;
         }
+        private List<Rectangle> GetHudSource()
+        {
+            List<Rectangle> result = new List<Rectangle>();
+            for (int i = 0; i < 53; i += 18)
+            {
+                result.Add(new Rectangle(i, 0, 17, 17));
+            }
+            return result;
+        }
     }
 
     public enum Walls
@@ -105,5 +122,11 @@ namespace _2DFirstGame.Utils
     public enum Decorations
     {
         Crate,
+    }
+    public enum Hud
+    {
+        Hearth_Full,
+        Hearth_Half,
+        Hearth_Empty,
     }
 }

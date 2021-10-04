@@ -22,6 +22,7 @@ namespace _2DFirstGame
         private bool isGameOver = false;
 
         private Level level0;
+        Player player;
 
         public Game2()
         {
@@ -35,6 +36,7 @@ namespace _2DFirstGame
             Logger.Info("Game changed panel", null);
             _frameCounter = new FPS_Handler();
             base.Initialize();
+            player = new Player(10);
         }
 
         protected override void LoadContent()
@@ -48,7 +50,8 @@ namespace _2DFirstGame
             texturesUtil = new TexturesUtil(_spriteBatch,
                 Content.Load<Texture2D>(@"Textures\walls"),
                 Content.Load<Texture2D>(@"Textures\grounds"),
-                Content.Load<Texture2D>(@"Textures\decorations"));
+                Content.Load<Texture2D>(@"Textures\decorations"),
+                Content.Load<Texture2D>(@"Textures\hud"));
             level0 = new Level(texturesUtil, @"levels\level0.txt");
             SongPlayer.PlayBackgroundSong(Content.Load<Song>(@"Sounds\background"));
         }
@@ -75,6 +78,10 @@ namespace _2DFirstGame
             {
                 level0.Update(Direction.Right);
             }
+            if (Utils.Keyboard.HasBeenPressed(Keys.Space))
+            {
+                player.HP--;
+            }
             base.Update(gameTime);
         }
 
@@ -92,7 +99,8 @@ namespace _2DFirstGame
             else
             {
                 level0.Draw();
-               _drawingHelper.DrawString(new Vector2(10, 10), getFPS(gameTime), 0.2f);
+                HUD.DrawHUD(_spriteBatch, texturesUtil, player);
+               _drawingHelper.DrawString(new Vector2(Config.Width-100, 10), getFPS(gameTime), 0.2f);
             }
             _spriteBatch.End();
         }
@@ -102,7 +110,7 @@ namespace _2DFirstGame
 
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
-            return $"FPS: {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+            return $"{_frameCounter.AverageFramesPerSecond.ToString("F0")} FPS";
         }
     }
 }
