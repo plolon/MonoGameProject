@@ -1,4 +1,5 @@
 ﻿using _2DFirstGame.DrawingHandler;
+using _2DFirstGame.Shaders;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +14,7 @@ namespace _2DFirstGame
         private DrawingHelper _drawingHelper;
         Texture2D background;
 
-        Effect _effect;
+        ShaderHelper shaders; 
 
         public Game3()
         {
@@ -22,6 +23,7 @@ namespace _2DFirstGame
             IsMouseVisible = true;
             _graphics.PreferredBackBufferWidth = 1080;
             _graphics.PreferredBackBufferHeight = 720;
+            
         }
 
         protected override void Initialize()
@@ -33,8 +35,7 @@ namespace _2DFirstGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("background");
-            _effect = Content.Load<Effect>("LinearFade");
-            _effect.Parameters["Visibility"].SetValue(0.7f);
+            shaders = new ShaderHelper(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -49,7 +50,7 @@ namespace _2DFirstGame
 
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            _effect.CurrentTechnique.Passes[0].Apply();
+            shaders.GetEffect(ShaderHelper.Effects.LinearFade).CurrentTechnique.Passes[0].Apply();
             _spriteBatch.Draw(background, new Vector2(0, background.Height), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0f);
             _spriteBatch.End();
 
