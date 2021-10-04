@@ -35,6 +35,7 @@ namespace _2DFirstGame
             Logger.Info("Game changed panel", null);
             _frameCounter = new FPS_Handler();
             base.Initialize();
+            Player player = new Player(10);
         }
 
         protected override void LoadContent()
