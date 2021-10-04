@@ -36,7 +36,7 @@ namespace _2DFirstGame
             Logger.Info("Game changed panel", null);
             _frameCounter = new FPS_Handler();
             base.Initialize();
-            player = new Player(7);
+            player = new Player(10);
         }
 
         protected override void LoadContent()
@@ -77,6 +77,10 @@ namespace _2DFirstGame
             if (Utils.Keyboard.IsPressed(Keys.Left) || Utils.Keyboard.IsPressed(Keys.A))
             {
                 level0.Update(Direction.Right);
+            }
+            if (Utils.Keyboard.HasBeenPressed(Keys.Space))
+            {
+                player.HP--;
             }
             base.Update(gameTime);
         }
