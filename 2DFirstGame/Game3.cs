@@ -11,8 +11,9 @@ namespace _2DFirstGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private DrawingHelper _drawingHelper;
-
         Texture2D background;
+
+        Effect _effect;
 
         public Game3()
         {
@@ -31,7 +32,9 @@ namespace _2DFirstGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>(@"water\background");
+            background = Content.Load<Texture2D>("background");
+            _effect = Content.Load<Effect>("LinearFade");
+            _effect.Parameters["Visibility"].SetValue(0.7f);
         }
 
         protected override void Update(GameTime gameTime)
@@ -43,11 +46,17 @@ namespace _2DFirstGame
 
         protected override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
 
-            _spriteBatch.Draw(background, new Rectangle(0, 0, 1080, 450), Color.White);
-
+            GraphicsDevice.Clear(Color.Black);
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            _effect.CurrentTechnique.Passes[0].Apply();
+            _spriteBatch.Draw(background, new Vector2(0, background.Height), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0f);
             _spriteBatch.End();
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
+            _spriteBatch.End();
+
         }
     }
 }
