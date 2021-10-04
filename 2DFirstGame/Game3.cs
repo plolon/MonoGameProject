@@ -1,5 +1,4 @@
 ﻿using _2DFirstGame.DrawingHandler;
-using _2DFirstGame.DrawingHandler.String.Utils;
 using _2DFirstGame.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,11 +12,15 @@ namespace _2DFirstGame
         private SpriteBatch _spriteBatch;
         private DrawingHelper _drawingHelper;
 
+        Texture2D background;
+
         public Game3()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.PreferredBackBufferWidth = 1080;
+            _graphics.PreferredBackBufferHeight = 720;
         }
 
         protected override void Initialize()
@@ -28,6 +31,7 @@ namespace _2DFirstGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            background = Content.Load<Texture2D>(@"water\background");
         }
 
         protected override void Update(GameTime gameTime)
@@ -39,7 +43,11 @@ namespace _2DFirstGame
 
         protected override void Draw(GameTime gameTime)
         {
+            _spriteBatch.Begin();
 
+            _spriteBatch.Draw(background, new Rectangle(0, 0, 1080, 450), Color.White);
+
+            _spriteBatch.End();
         }
     }
 }
