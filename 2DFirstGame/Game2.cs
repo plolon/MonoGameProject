@@ -97,7 +97,7 @@ namespace _2DFirstGame
                 gameOverString.Draw();
             }
             else
-            {
+            {//return float4(tex2D(SpriteTextureSampler, input.Position) * sin((input.Position.y - 0.5) * 3.15) * Visibility) * input.Color;
                 level0.Draw();
                 HUD.DrawHUD(_spriteBatch, texturesUtil, player);
                _drawingHelper.DrawString(new Vector2(Config.Width-100, 10), getFPS(gameTime), 0.2f);
