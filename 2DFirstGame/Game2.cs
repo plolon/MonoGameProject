@@ -92,7 +92,7 @@ namespace _2DFirstGame
             else
             {
                 level0.Draw();
-               _drawingHelper.DrawString(new Vector2(10, 10), getFPS(gameTime), 0.2f);
+               _drawingHelper.DrawString(new Vector2(Config.Width-100, 10), getFPS(gameTime), 0.2f);
             }
             _spriteBatch.End();
         }
@@ -102,7 +102,7 @@ namespace _2DFirstGame
 
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _frameCounter.Update(deltaTime);
-            return $"FPS: {_frameCounter.AverageFramesPerSecond.ToString("F0")}";
+            return $"{_frameCounter.AverageFramesPerSecond.ToString("F0")} FPS";
         }
     }
 }
