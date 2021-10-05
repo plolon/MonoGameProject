@@ -14,7 +14,7 @@ namespace _2DFirstGame
         private SpriteBatch _spriteBatch;
         private DrawingHelper _drawingHelper;
         Texture2D background;
-
+        RenderTarget2D target;
         ShaderHelper shaders;
 
         public Game3()
@@ -29,6 +29,7 @@ namespace _2DFirstGame
 
         protected override void Initialize()
         {
+            target = new RenderTarget2D(GraphicsDevice, 1080, 720);
             base.Initialize();
         }
 
@@ -48,11 +49,22 @@ namespace _2DFirstGame
 
         protected override void Draw(GameTime gameTime)
         {
+            //clear
             GraphicsDevice.Clear(Color.Black);
+            //load effects (can use passes)
+            Effect eff1 = shaders.GetEffect(ShaderHelper.Effects.Blur);
+            Effect eff2 = shaders.GetEffect(ShaderHelper.Effects.LinearFade);
+            //set render target
+            GraphicsDevice.SetRenderTarget(target);
+            //draw first effect
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-
-            shaders.GetEffect(ShaderHelper.Effects.Blur).CurrentTechnique.Passes[0].Apply();
+            eff2.CurrentTechnique.Passes[0].Apply();
             _spriteBatch.Draw(background, new Vector2(0, background.Height), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0f);
+
+            //draw second effect from targer
+            GraphicsDevice.SetRenderTarget(null);
+            eff1.CurrentTechnique.Passes[0].Apply();
+            _spriteBatch.Draw(target, Vector2.Zero, Color.White);
             _spriteBatch.End();
 
             _spriteBatch.Begin();
