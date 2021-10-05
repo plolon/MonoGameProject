@@ -48,12 +48,10 @@ namespace _2DFirstGame
 
         protected override void Draw(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.Black);
             _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            //shaders.GetEffect(ShaderHelper.Effects.LinearFade).CurrentTechnique.Passes[0].Apply();
-            shaders.GetEffect(ShaderHelper.Effects.Blur).CurrentTechnique.Passes[0].Apply();
 
+            shaders.GetEffect(ShaderHelper.Effects.Blur).CurrentTechnique.Passes[0].Apply();
             _spriteBatch.Draw(background, new Vector2(0, background.Height), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0f);
             _spriteBatch.End();
 

@@ -25,6 +25,7 @@ namespace _2DFirstGame.Shaders
             linearFade.Parameters["Visibility"].SetValue(0.7f);
             effects.Add(linearFade);
             Effect gaussianBlur = content.Load<Effect>(@"Shaders\GaussianBlur");
+            gaussianBlur.Parameters["Visibility"].SetValue(0.7f);
             effects.Add(gaussianBlur);
         }
 
